@@ -17,22 +17,28 @@ Public sector procurement is a multi-billion dollar industry in Pakistan, repres
 
 ## 2. Monetization Vectors
 
-TenderCheck operates on a B2B freemium model combining subscription SaaS tiers, corporate listings, and targeted business ads.
+TenderCheck operates on an ad-supported freemium model. Free users generate display ads impressions, with standard and premium tiers available to remove ads and unlock advanced bidding tools.
 
 ```mermaid
 graph TD
-    User([Contractor / User]) -->|WhatsApp/PEC Filters| Std[1. TenderCheck Standard Subscription]
-    User -->|AI PDF Parsers| Prem[2. TenderCheck Premium Subscription]
-    User -->|Ad Views| Ads[3. Display Directory Ads]
+    User([Contractor / User]) -->|Ad Views| Ads[1. Display Directory Ads]
+    User -->|WhatsApp/PEC Filters| Std[2. TenderCheck Standard Subscription]
+    User -->|AI PDF Parsers| Prem[3. TenderCheck Premium Subscription]
     Corp([Private Brands]) -->|Direct Posts| Direct[4. Direct B2B Tender Posting]
 
-    Std -->|PKR 2,000/mo| Rev[Total App Revenue]
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    Std -->|PKR 2,000/mo| Rev
     Prem -->|PKR 4,500/mo| Rev
-    Ads -->|AdMob CPM $0.40| Rev
     Direct -->|PKR 50,000/mo fee| Rev
 ```
 
-### A. TenderCheck Standard (B2B SaaS)
+### A. Ad-Supported Model (Free Tier)
+*   **Format**: Minimal display ads visible to non-subscribing users. Subscribers (Standard and Premium) are excluded from the ad pool.
+*   **Metrics & Assumptions**:
+    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
+    *   **User Sessions**: Contractors are highly active, checking listings daily (approx. 25 days/month). Average of 8 page views per trip checking details = 200 ad impressions per user/month.
+
+### B. TenderCheck Standard (B2B SaaS)
 *   **Format**: Monthly or annual membership unlocking priority access and custom search matching.
 *   **Standard Features**:
     *   Instant **WhatsApp alerts** matching specific keyword triggers (e.g. "bridge repair", "laptop supply").
@@ -41,7 +47,7 @@ graph TD
 *   **Pricing**: 2,000 PKR / month (approx. $7.19 USD) or 20,000 PKR / year.
 *   **Conversion Rate**: Projected at 2.0% of Monthly Active Users (MAU).
 
-### B. TenderCheck Premium (B2B SaaS + AI)
+### C. TenderCheck Premium (B2B SaaS + AI)
 *   **Format**: Elite subscription tier targeting large construction companies and bidding teams.
 *   **Premium Features**:
     *   **AI Bidding RFP Parser**: Built-in Gemini parser that reads downloaded PPRA bidding PDFs, instantly extracting required experience, turnover ratios, and compliance rules as clear summaries.
@@ -50,16 +56,10 @@ graph TD
 *   **Pricing**: 4,500 PKR / month (approx. $16.19 USD) or 45,000 PKR / year.
 *   **Conversion Rate**: Projected at 0.5% of Monthly Active Users (MAU).
 
-### C. Direct B2B Tender Posting
+### D. Direct B2B Tender Posting
 *   **Format**: Large private corporations, NGOs, or autonomous municipal departments pay a monthly listing fee to post their tenders directly to reach verified contractors (bypassing slow newspaper printing).
 *   **Pricing**: 50,000 PKR / month flat rate for unlimited postings.
 *   **Target Clients**: 5 active corporate poster accounts in Year 1.
-
-### D. Ad-Supported Model (Free Tier)
-*   **Format**: Minimal display ads visible to non-subscribing users. Subscribers (Standard and Premium) are excluded from the ad pool.
-*   **Metrics & Assumptions**:
-    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
-    *   **User Sessions**: Contractors are highly active, checking listings daily (approx. 25 days/month). Average of 8 page views per trip checking details = 200 ad impressions per user/month.
 
 ---
 

@@ -8,20 +8,20 @@ In Pakistan, children are increasingly exposed to digital screens, but standard 
 *   **Mixed Cultural & Language Exposure**: Auto-play algorithms routinely funnel children from high-quality educational videos to low-quality cartoon channels featuring inappropriate Urdu/Hindi slang or violent themes.
 *   **Mobile Data Package Drain**: High-resolution video streaming quickly depletes expensive mobile 4G/LTE data packages, leading to unexpected billing shocks for parents.
 
-SafeStream Kids solves this by stripping out all ads and restricting video playback exclusively to parents' approved whitelists or curated collections vetted by a trusted local community of Pakistani parents.
+SafeStream Kids solves this by stripping out all YouTube ads, restricting video playback exclusively to parents' approved whitelists, and displaying non-intrusive, kid-safe, COPPA-compliant display ads in the free version (with a 100% ad-free experience reserved for Pro subscribers).
 
 ---
 
 ## 1. Targeted Local Context & Features
 The app is tailored to the connectivity and cultural needs of Pakistani households:
-*   **Ad-Stripping Sandbox Player**: An embedded custom player that blocks all YouTube ads, ensuring children never see inappropriate betting, gambling, or adult-themed commercial banners.
+*   **Ad-Stripping Sandbox Player**: An embedded custom player that blocks all YouTube ads, ensuring children never see inappropriate betting, gambling, or adult-themed commercial banners. In the free tier, this player displays kid-safe, COPPA-compliant educational banner ads.
 *   **Data Package Guard**: A parental toggle that limits video resolution strictly to 240p or 360p when on mobile data, saving expensive mobile internet packages.
 *   **Urdu & Local Language Curation**: Focuses on curating moral stories, nursery rhymes, and educational content in local languages (Urdu, Punjabi, Sindhi, Pashto, Balochi) and bilingual (Urdu-English) STEM programs.
 
 ---
 
 ## 2. Phase 1: MVP (Minimum Viable Product) Specification
-The MVP delivers a secure, offline-caching, ad-free sandboxed video player with a PIN-protected parent whitelist setup.
+The MVP delivers a secure, offline-caching sandboxed video player (supported by kid-safe display ads on the free tier, completely ad-free on Pro) with a PIN-protected parent whitelist setup.
 
 ### A. Parent Whitelist Portal
 *   **Access Control**: The Parent Portal is locked behind a 4-digit PIN, pattern, or device biometric check (Fingerprint/Face Unlock).

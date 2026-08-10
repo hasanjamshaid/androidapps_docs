@@ -16,32 +16,32 @@ The urban residential rental and buying market in major cities (Karachi, Lahore,
 
 ## 2. Monetization Vectors
 
-BastiCheck operates on a mixed model of B2B real-estate lead commissions, localized provider placements, premium B2C checks, and native display ads.
+BastiCheck operates on an ad-supported freemium model. Free users generate localized display ad impressions, with paid upgrades for B2B real-estate lead routing, local brand sponsorships, and premium address check subscriptions.
 
 ```mermaid
 graph TD
-    User([Property Hunter]) -->|Request Vetted Agent| Lead[1. Real Estate Lead Bounty]
-    User -->|Upgrade to Pro Check| Pro[2. Premium B2C Subscriptions]
-    User -->|Browse Rating Cards| Ads[3. Localized Display Ads]
+    User([Property Hunter]) -->|Browse Rating Cards| Ads[1. Localized Display Ads]
+    User -->|Request Vetted Agent| Lead[2. Real Estate Lead Bounty]
+    User -->|Upgrade to Pro Check| Pro[3. Premium B2C Subscriptions]
     Providers([Tankers / Alarms / ISPs]) -->|Pin Service Block| Placements[4. Local B2B Sponsors]
 
-    Lead -->|PKR 1,500 lead fee| Rev[Total App Revenue]
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    Lead -->|PKR 1,500 lead fee| Rev
     Pro -->|PKR 250/mo subscription| Rev
-    Ads -->|AdMob CPM $0.40| Rev
     Placements -->|PKR 12,000/mo sponsorship| Rev
 ```
 
-### A. Real Estate Agent Lead Generation (B2B Transactions - Primary Stream)
+### A. Ad-Supported Model (Free Tier)
+*   **Format**: Location-specific display banners shown on scorecards. Pro subscribers do not see ads.
+*   **Metrics & Assumptions**:
+    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
+    *   **User Sessions**: Users actively looking for homes check listings intensely. Free users average 4 sessions/month, viewing 8 pages per visit = 32 ad impressions per free user/month.
+
+### B. Real Estate Agent Lead Generation (B2B Transactions)
 *   **Format**: When users review a block's scorecard and search for available listings, the app connects them to pre-vetted, reliable real-estate agents active in that sector.
 *   **Monetization Mechanism**: Referral bounty paid by the agent for connecting them with a pre-qualified buyer or tenant ready to view properties.
 *   **Pricing**: 1,500 PKR flat lead bounty.
 *   **Conversion Rate**: Projected at 0.40% of Monthly Active Users (MAU) per month.
-
-### B. B2B Localized Infrastructure Sponsors
-*   **Format**: Local services servicing that specific block pay to be pinned inside rating cards. Examples: private water tankers, home security monitoring services, or high-speed fiber internet providers (Nayatel, StormFiber) looking to attract residents in that block.
-*   **Monetization Mechanism**: Monthly sponsorship placement fee per localized block slot.
-*   **Pricing**: 12,000 PKR / month per partner slot.
-*   **Target Partners**: 20 active sponsors in Year 1.
 
 ### C. BastiCheck Pro (Premium B2C Subscription)
 *   **Format**: Premium subscription unlocking detailed property due-diligence data.
@@ -53,11 +53,11 @@ graph TD
 *   **Pricing**: 250 PKR / month (approx. $0.90 USD) or 1,500 PKR / year.
 *   **Conversion Rate**: Projected at 1.0% of Monthly Active Users (MAU).
 
-### D. Ad-Supported Model (Free Tier)
-*   **Format**: Location-specific display banners shown on scorecards. Pro subscribers do not see ads.
-*   **Metrics & Assumptions**:
-    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
-    *   **User Sessions**: Users actively looking for homes check listings intensely. Free users average 4 sessions/month, viewing 8 pages per visit = 32 ad impressions per free user/month.
+### D. B2B Localized Infrastructure Sponsors
+*   **Format**: Local services servicing that specific block pay to be pinned inside rating cards. Examples: private water tankers, home security monitoring services, or high-speed fiber internet providers (Nayatel, StormFiber) looking to attract residents in that block.
+*   **Monetization Mechanism**: Monthly sponsorship placement fee per localized block slot.
+*   **Pricing**: 12,000 PKR / month per partner slot.
+*   **Target Partners**: 20 active sponsors in Year 1.
 
 ---
 

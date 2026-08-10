@@ -17,34 +17,34 @@ Pakistan's retail payment sector has modernized rapidly. As of 2026, the country
 
 ## 2. Monetization Vectors
 
-CardPerks utilizes four local monetization streams, heavily focusing on bank lead generation and merchant sponsorships.
+CardPerks is primarily an ad-supported application. It monetizes through display and native ads, supplemented by bank credit card referrals, featured retail brand placements, and B2B bank analytics.
 
 ```mermaid
 graph TD
-    User([App User]) -->|Credit Card Leads| LeadGen[1. Bank Credit Card Referrals]
-    User -->|Ad Views| Ads[2. Local Display & Native Ads]
+    User([App User]) -->|Ad Views| Ads[1. Local Display & Native Ads]
+    User -->|Credit Card Leads| LeadGen[2. Bank Credit Card Referrals]
     User -->|Featured Spots| Brands[3. Featured Merchant Listings]
     User -->|Anonymized Data| Insights[4. B2B Bank Insights Dashboard]
 
-    LeadGen -->|PKR 3,000 bounty per card| Rev[Total App Revenue]
-    Ads -->|AdMob CPM $0.40| Rev
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    LeadGen -->|PKR 3,000 bounty per card| Rev
     Brands -->|PKR 10,000/mo fee| Rev
     Insights -->|PKR 75,000/mo per bank| Rev
 ```
 
-### A. Bank Credit Card Referrals (Lead Generation)
-*   **Format**: When users browse deals on cards they do not hold (e.g. they see *"30% off UBL Signature Visa"* at their favorite restaurant), the app displays an integrated "Apply for this Card" lead capture button.
-*   **Monetization Mechanism**: Commercial banks pay high referral commissions (bounties) for new verified credit card acquisitions. 
-*   **Metrics & Assumptions**:
-    *   **Average Bank Payout**: 3,000 PKR per approved credit card acquisition.
-    *   **Conversion Rate**: Projected at 0.1% of Monthly Active Users (MAU) per month (e.g., 100 successful card approvals per month for 100,000 MAU).
-
-### B. Ad-Supported Model (Display & Native Ads)
+### A. Ad-Supported Model (Display & Native Ads)
 *   **Format**: Native banner integrations on search directories and banner ads on specific merchant deal pages.
 *   **Metrics & Assumptions**:
     *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
     *   **User Sessions**: Average of 8 sessions/month (twice a week when dining out or shopping), viewing 5 merchant pages per session = 40 page/ad views per user/month.
     *   **Ads Displayed**: 1 impression per page view. Average of 40 impressions per user per month.
+
+### B. Bank Credit Card Referrals (Lead Generation)
+*   **Format**: When users browse deals on cards they do not hold (e.g. they see *"30% off UBL Signature Visa"* at their favorite restaurant), the app displays an integrated "Apply for this Card" lead capture button.
+*   **Monetization Mechanism**: Commercial banks pay high referral commissions (bounties) for new verified credit card acquisitions. 
+*   **Metrics & Assumptions**:
+    *   **Average Bank Payout**: 3,000 PKR per approved credit card acquisition.
+    *   **Conversion Rate**: Projected at 0.1% of Monthly Active Users (MAU) per month (e.g., 100 successful card approvals per month for 100,000 MAU).
 
 ### C. Featured Merchant Partnerships (App Sponsor Slots)
 *   **Format**: Restaurants, fashion brands, and retail networks pay to pin their active promotions at the top of the "Nearby Deals" page or receive a "Featured Partner" banner on the home screen.

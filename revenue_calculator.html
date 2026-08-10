@@ -505,7 +505,7 @@
             <button class="tab-btn" id="tab-sastasauda" onclick="switchTab('sastasauda')">SastaSauda (PK)</button>
             <button class="tab-btn" id="tab-safestream" onclick="switchTab('safestream')">SafeStream (PK)</button>
             <button class="tab-btn" id="tab-urdukhabrein" onclick="switchTab('urdukhabrein')">UrduKhabrein (PK)</button>
-            <button class="tab-btn" id="tab-allergyguard" onclick="switchTab('allergyguard')">AllergyGuard (PK)</button>
+            <button class="tab-btn" id="tab-allergyguard" onclick="switchTab('allergyguard')">AllergenCheck (US/EU)</button>
             <button class="tab-btn" id="tab-schoolcheck" onclick="switchTab('schoolcheck')">SchoolCheck (PK)</button>
         </div>
     </div>
@@ -1993,6 +1993,30 @@
                     </div>
                     <input type="range" class="slider-input" id="param-sf-partnerfee" min="2000" max="50000" step="500" value="10000" oninput="calculateSafeStream()">
                 </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <span class="control-label">Ad CPM (USD)</span>
+                        <span class="control-value" id="val-sf-cpm">$0.40</span>
+                    </div>
+                    <input type="range" class="slider-input" id="param-sf-cpm" min="0.10" max="5.00" step="0.05" value="0.40" oninput="calculateSafeStream()">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <span class="control-label">Monthly Sessions / User</span>
+                        <span class="control-value" id="val-sf-sessions">15 sessions</span>
+                    </div>
+                    <input type="range" class="slider-input" id="param-sf-sessions" min="1" max="100" step="1" value="15" oninput="calculateSafeStream()">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <span class="control-label">Views per Session</span>
+                        <span class="control-value" id="val-sf-views">6 views</span>
+                    </div>
+                    <input type="range" class="slider-input" id="param-sf-views" min="1" max="30" step="1" value="6" oninput="calculateSafeStream()">
+                </div>
             </div>
 
             <!-- Inputs Wrapper: UrduKhabrein -->
@@ -2099,9 +2123,9 @@
                 <div class="control-group">
                     <div class="control-header">
                         <span class="control-label">Average Basket Size</span>
-                        <span class="control-value" id="val-ag-basket">3,000 PKR</span>
+                        <span class="control-value" id="val-ag-basket">$40.00</span>
                     </div>
-                    <input type="range" class="slider-input" id="param-ag-basket" min="500" max="10000" step="100" value="3000" oninput="calculateAllergyGuard()">
+                    <input type="range" class="slider-input" id="param-ag-basket" min="5" max="200" step="5" value="40" oninput="calculateAllergyGuard()">
                 </div>
 
                 <div class="control-group">
@@ -2122,10 +2146,10 @@
 
                 <div class="control-group">
                     <div class="control-header">
-                        <span class="control-label">AllergyGuard Pro Sub Price</span>
-                        <span class="control-value" id="val-ag-profee">150 PKR</span>
+                        <span class="control-label">AllergenCheck Pro Sub Price</span>
+                        <span class="control-value" id="val-ag-profee">$1.99</span>
                     </div>
-                    <input type="range" class="slider-input" id="param-ag-profee" min="50" max="1000" step="25" value="150" oninput="calculateAllergyGuard()">
+                    <input type="range" class="slider-input" id="param-ag-profee" min="0.49" max="9.99" step="0.10" value="1.99" oninput="calculateAllergyGuard()">
                 </div>
 
                 <div class="control-group">
@@ -2139,17 +2163,17 @@
                 <div class="control-group">
                     <div class="control-header">
                         <span class="control-label">Brand Placement Monthly Fee</span>
-                        <span class="control-value" id="val-ag-partnerfee">15,000 PKR</span>
+                        <span class="control-value" id="val-ag-partnerfee">$100</span>
                     </div>
-                    <input type="range" class="slider-input" id="param-ag-partnerfee" min="2000" max="50000" step="500" value="15000" oninput="calculateAllergyGuard()">
+                    <input type="range" class="slider-input" id="param-ag-partnerfee" min="10" max="1000" step="10" value="100" oninput="calculateAllergyGuard()">
                 </div>
 
                 <div class="control-group">
                     <div class="control-header">
-                        <span class="control-label">Ad CPM (USD for Pakistan)</span>
-                        <span class="control-value" id="val-ag-cpm">$0.40</span>
+                        <span class="control-label">Ad CPM (US/EU Average)</span>
+                        <span class="control-value" id="val-ag-cpm">$3.50</span>
                     </div>
-                    <input type="range" class="slider-input" id="param-ag-cpm" min="0.10" max="2.00" step="0.05" value="0.40" oninput="calculateAllergyGuard()">
+                    <input type="range" class="slider-input" id="param-ag-cpm" min="0.50" max="10.00" step="0.10" value="3.50" oninput="calculateAllergyGuard()">
                 </div>
 
                 <div class="control-group">
@@ -3189,7 +3213,7 @@
             applyHalalScenario('base');
         } else if (tab === 'cardperks') {
             document.getElementById('app-title').innerText = "CardPerks Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected revenue based on card referrals and brand sponsorships in the Pakistani local market.";
+            document.getElementById('app-desc').innerText = "Simulate expected revenue based on native display ads, bank card referrals, featured retail promotions, and B2B bank insights in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
             document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Metropolitans (1.8M - 2M Credit Cards)";
 
@@ -3229,7 +3253,7 @@
             applyTenderCheckScenario('base');
         } else if (tab === 'labcheck') {
             document.getElementById('app-title').innerText = "LabCheck Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected booking commissions, premium AI report analysis memberships, featured lab branches, and ads in Pakistan.";
+            document.getElementById('app-desc').innerText = "Simulate expected native display ads, booking commissions, premium AI report analysis memberships, and featured lab placements in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
             document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Self-Paying Medical Patients (Metropolitan Areas)";
 
@@ -3269,7 +3293,7 @@
             applyKismatBondScenario('base');
         } else if (tab === 'dawaacheck') {
             document.getElementById('app-title').innerText = "DawaaCheck Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected online pharmacy orders, pharma brand sponsors, premium medicine cabinets, and directory ads in Pakistan.";
+            document.getElementById('app-desc').innerText = "Simulate expected native display ads, online pharmacy orders, pharma brand sponsors, and premium medicine cabinets in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
             document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Chronic Disease Patients & Retail Shoppers";
 
@@ -3369,7 +3393,7 @@
             applySolarCheckScenario('base');
         } else if (tab === 'sarkarinaukri') {
             document.getElementById('app-title').innerText = "SarkariNaukri Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected display ads, B2C test preparation subscriptions, physical dossier packaging margins, and featured coaching placement sponsorships in Pakistan.";
+            document.getElementById('app-desc').innerText = "Simulate expected native display ads, B2C test preparation subscriptions, physical dossier packaging margins, and featured coaching placement sponsorships in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
             document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Unemployed Graduates & Government Job Candidates";
 
@@ -3409,7 +3433,7 @@
             applySaleScoutScenario('base');
         } else if (tab === 'basticheck') {
             document.getElementById('app-title').innerText = "BastiCheck Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected display ads, B2B real-estate lead referral commissions, localized infrastructure ads, and premium address check subscriptions in Pakistan.";
+            document.getElementById('app-desc').innerText = "Simulate expected native display ads, B2B real-estate lead referral commissions, localized infrastructure ads, and premium address check subscriptions in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
             document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Home Hunters, Renter Networks, and Property Investors";
 
@@ -3449,7 +3473,7 @@
             applySiyahatScenario('base');
         } else if (tab === 'sastasauda') {
             document.getElementById('app-title').innerText = "SastaSauda Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected display ads, B2C premium SastaSauda Pro subscriptions, B2B FMCG brand sponsorships, and bank card lead referrals in Pakistan.";
+            document.getElementById('app-desc').innerText = "Simulate expected native display ads, B2C premium SastaSauda Pro subscriptions, B2B FMCG brand sponsorships, and bank card lead referrals in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
             document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Household Shoppers, Retail Consumers, and Banking Partners";
 
@@ -3469,19 +3493,19 @@
             applySastaSaudaScenario('base');
         } else if (tab === 'safestream') {
             document.getElementById('app-title').innerText = "SafeStream Kids Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected revenue based on premium B2C subscriptions, B2B educator placements, and Montessori kit affiliate commissions in Pakistan.";
+            document.getElementById('app-desc').innerText = "Simulate expected revenue based on free tier display ads, premium B2C subscriptions, B2B educator placements, and Montessori kit affiliate commissions in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
-            document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Middle-Class Parents (Bilingual Learning, Ad-Free Safety)";
+            document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Middle-Class Parents (Bilingual Learning, Ad-Free Safety on Pro)";
 
             document.getElementById('scenarios-safestream').classList.remove('hidden');
             document.getElementById('inputs-safestream').classList.remove('hidden');
 
-            document.getElementById('lbl-stream-1').innerText = "Directory Ads (Ad-Free)";
+            document.getElementById('lbl-stream-1').innerText = "Free Tier Display Ads";
             document.getElementById('lbl-stream-2').innerText = "SafeStream Pro Subscriptions";
             document.getElementById('lbl-stream-3').innerText = "Montessori Kit Sales Commissions";
             document.getElementById('lbl-stream-4').innerText = "B2B Educator Placements";
 
-            document.getElementById('leg-name-1').innerText = "Ads (0 PKR)";
+            document.getElementById('leg-name-1').innerText = "Display Ads";
             document.getElementById('leg-name-2').innerText = "SafeStream Pro";
             document.getElementById('leg-name-3').innerText = "Kit Commissions";
             document.getElementById('leg-name-4').innerText = "Educator Spots";
@@ -3508,28 +3532,28 @@
 
             applyUrduKhabreinScenario('base');
         } else if (tab === 'allergyguard') {
-            document.getElementById('app-title').innerText = "AllergyGuard Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected display ads, B2C premium AllergyGuard Pro subscriptions, B2B organic brand placements, and e-commerce affiliate commissions in Pakistan.";
-            document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
-            document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Families with Food Allergies & Intolerances";
+            document.getElementById('app-title').innerText = "AllergenCheck Revenue Projections";
+            document.getElementById('app-desc').innerText = "Simulate expected display ads, B2C premium AllergenCheck Pro subscriptions, B2B organic brand placements, and e-commerce affiliate commissions in Western markets (US, UK, and European Union).";
+            document.getElementById('badge-currency').innerText = "Live Simulator (USD)";
+            document.getElementById('footer-text').innerText = "Global Market Target Audience: Health-Conscious Families, Celiac & Allergen Sensitive Households in US/UK/EU";
 
             document.getElementById('scenarios-allergyguard').classList.remove('hidden');
             document.getElementById('inputs-allergyguard').classList.remove('hidden');
 
-            document.getElementById('lbl-stream-1').innerText = "Directory Display Ads";
-            document.getElementById('lbl-stream-2').innerText = "AllergyGuard Pro Subscriptions";
-            document.getElementById('lbl-stream-3').innerText = "E-Commerce Affiliate shop";
+            document.getElementById('lbl-stream-1').innerText = "Free Tier Display Ads";
+            document.getElementById('lbl-stream-2').innerText = "AllergenCheck Pro Subscriptions";
+            document.getElementById('lbl-stream-3').innerText = "E-Commerce Affiliate Commissions";
             document.getElementById('lbl-stream-4').innerText = "B2B Brand Placements";
 
             document.getElementById('leg-name-1').innerText = "Display Ads";
-            document.getElementById('leg-name-2').innerText = "Pro Subs";
+            document.getElementById('leg-name-2').innerText = "AllergenCheck Pro";
             document.getElementById('leg-name-3').innerText = "Affiliate Store";
-            document.getElementById('leg-name-4').innerText = "Brand Placements";
+            document.getElementById('leg-name-4').innerText = "Brand Partners";
 
             applyAllergyGuardScenario('base');
         } else {
             document.getElementById('app-title').innerText = "SchoolCheck Revenue Projections";
-            document.getElementById('app-desc').innerText = "Simulate expected display ads, B2C premium SchoolCheck Pro subscriptions, B2B home tutor & academy placements, and school admission referrals in Pakistan.";
+            document.getElementById('app-desc').innerText = "Simulate expected native display ads, B2C premium SchoolCheck Pro subscriptions, B2B home tutor & academy placements, and school admission referrals in Pakistan.";
             document.getElementById('badge-currency').innerText = "Live Simulator (PKR)";
             document.getElementById('footer-text').innerText = "Pakistan Market Target Audience: Parents of K-12 private school and daycare students";
 
@@ -4678,7 +4702,10 @@
             proconv: 2.0,
             profee: 150,
             partnercount: 3,
-            partnerfee: 10000
+            partnerfee: 10000,
+            cpm: 0.30,
+            sessions: 10,
+            views: 4
         },
         base: {
             mau: 50000,
@@ -4688,7 +4715,10 @@
             proconv: 2.0,
             profee: 150,
             partnercount: 10,
-            partnerfee: 10000
+            partnerfee: 10000,
+            cpm: 0.40,
+            sessions: 15,
+            views: 6
         },
         optimistic: {
             mau: 150000,
@@ -4698,7 +4728,10 @@
             proconv: 2.5,
             profee: 150,
             partnercount: 25,
-            partnerfee: 10000
+            partnerfee: 10000,
+            cpm: 0.50,
+            sessions: 20,
+            views: 8
         }
     };
 
@@ -4760,6 +4793,9 @@
         document.getElementById('param-sf-profee').value = s.profee;
         document.getElementById('param-sf-partnercount').value = s.partnercount;
         document.getElementById('param-sf-partnerfee').value = s.partnerfee;
+        document.getElementById('param-sf-cpm').value = s.cpm;
+        document.getElementById('param-sf-sessions').value = s.sessions;
+        document.getElementById('param-sf-views').value = s.views;
 
         calculateSafeStream();
     }
@@ -4797,6 +4833,9 @@
         const proFee = parseFloat(document.getElementById('param-sf-profee').value);
         const partnerCount = parseFloat(document.getElementById('param-sf-partnercount').value);
         const partnerFee = parseFloat(document.getElementById('param-sf-partnerfee').value);
+        const cpm = parseFloat(document.getElementById('param-sf-cpm').value || 0.40);
+        const sessions = parseFloat(document.getElementById('param-sf-sessions').value || 15);
+        const views = parseFloat(document.getElementById('param-sf-views').value || 6);
         const rate = parseFloat(document.getElementById('param-rate').value) || 278;
 
         // Labels
@@ -4808,10 +4847,15 @@
         document.getElementById('val-sf-profee').innerText = formatNumber(proFee) + ' PKR';
         document.getElementById('val-sf-partnercount').innerText = partnerCount + ' partners';
         document.getElementById('val-sf-partnerfee').innerText = formatNumber(partnerFee) + ' PKR';
+        document.getElementById('val-sf-cpm').innerText = '$' + cpm.toFixed(2);
+        document.getElementById('val-sf-sessions').innerText = sessions + ' sessions';
+        document.getElementById('val-sf-views').innerText = views + ' views';
 
-        // 1. Ads (0 PKR)
-        const adRevPkr = 0;
-        const adRevUsd = 0;
+        // 1. Ads (PKR)
+        const freeUsers = mau * (1 - proConv);
+        const totalImpressions = freeUsers * sessions * views;
+        const adRevUsd = (totalImpressions / 1000.0) * cpm;
+        const adRevPkr = adRevUsd * rate;
 
         // 2. Premium Pro Subscriptions
         const proRevPkr = (mau * proConv) * proFee;
@@ -4933,43 +4977,43 @@
     // Scenarios: AllergyGuard
     const allergyguardScenarios = {
         conservative: {
-            mau: 10000,
+            mau: 15000,
             affilconv: 0.30,
-            basket: 3000,
+            basket: 30,
             comm: 5,
             proconv: 1.0,
-            profee: 150,
+            profee: 1.99,
             partnercount: 3,
-            partnerfee: 15000,
-            cpm: 0.40,
-            sessions: 8,
-            views: 6
+            partnerfee: 50,
+            cpm: 3.00,
+            sessions: 6,
+            views: 4
         },
         base: {
-            mau: 40000,
+            mau: 50000,
             affilconv: 0.50,
-            basket: 3000,
+            basket: 40,
             comm: 5,
             proconv: 1.5,
-            profee: 150,
-            partnercount: 8,
-            partnerfee: 15000,
-            cpm: 0.40,
+            profee: 1.99,
+            partnercount: 10,
+            partnerfee: 100,
+            cpm: 3.50,
             sessions: 8,
             views: 6
         },
         optimistic: {
-            mau: 120000,
+            mau: 150000,
             affilconv: 0.70,
-            basket: 3000,
+            basket: 50,
             comm: 5,
             proconv: 2.0,
-            profee: 150,
-            partnercount: 20,
-            partnerfee: 15000,
-            cpm: 0.45,
-            sessions: 8,
-            views: 6
+            profee: 1.99,
+            partnercount: 25,
+            partnerfee: 200,
+            cpm: 4.00,
+            sessions: 12,
+            views: 8
         }
     };
 
@@ -5063,7 +5107,7 @@
     }
 
     function calculateAllergyGuard() {
-        const mau = parseFloat(document.getElementById('param-ag-mau').value || 40000);
+        const mau = parseFloat(document.getElementById('param-ag-mau').value || 50000);
         const affilConv = parseFloat(document.getElementById('param-ag-affilconv').value) / 100.0;
         const basket = parseFloat(document.getElementById('param-ag-basket').value);
         const commission = parseFloat(document.getElementById('param-ag-comm').value) / 100.0;
@@ -5079,63 +5123,63 @@
         // Labels
         document.getElementById('val-ag-mau').innerText = formatNumber(mau);
         document.getElementById('val-ag-affilconv').innerText = (affilConv * 100).toFixed(2) + '%';
-        document.getElementById('val-ag-basket').innerText = formatNumber(basket) + ' PKR';
+        document.getElementById('val-ag-basket').innerText = '$' + basket.toFixed(2);
         document.getElementById('val-ag-comm').innerText = (commission * 100) + '%';
         document.getElementById('val-ag-proconv').innerText = (proConv * 100).toFixed(2) + '%';
-        document.getElementById('val-ag-profee').innerText = formatNumber(proFee) + ' PKR';
+        document.getElementById('val-ag-profee').innerText = '$' + proFee.toFixed(2);
         document.getElementById('val-ag-partnercount').innerText = partnerCount + ' partners';
-        document.getElementById('val-ag-partnerfee').innerText = formatNumber(partnerFee) + ' PKR';
+        document.getElementById('val-ag-partnerfee').innerText = '$' + partnerFee.toFixed(0);
         document.getElementById('val-ag-cpm').innerText = '$' + cpm.toFixed(2);
         document.getElementById('val-ag-sessions').innerText = sessions + ' sessions';
         document.getElementById('val-ag-views').innerText = views + ' views';
 
-        // 1. Ads (PKR)
+        // 1. Ads (USD)
         const freeUsers = mau * (1 - proConv);
         const totalImpressions = freeUsers * sessions * views;
         const adRevUsd = (totalImpressions / 1000.0) * cpm;
         const adRevPkr = adRevUsd * rate;
 
-        // 2. Premium Pro Subscriptions
-        const proRevPkr = (mau * proConv) * proFee;
-        const proRevUsd = proRevPkr / rate;
+        // 2. Premium Pro Subscriptions (USD)
+        const proRevUsd = (mau * proConv) * proFee;
+        const proRevPkr = proRevUsd * rate;
 
-        // 3. E-Commerce Affiliate Shop
-        const affilRevPkr = (mau * affilConv) * basket * commission;
-        const affilRevUsd = affilRevPkr / rate;
+        // 3. E-Commerce Affiliate Shop (USD)
+        const affilRevUsd = (mau * affilConv) * basket * commission;
+        const affilRevPkr = affilRevUsd * rate;
 
-        // 4. B2B Brand Placements
-        const brandRevPkr = partnerCount * partnerFee;
-        const brandRevUsd = brandRevPkr / rate;
+        // 4. B2B Brand Placements (USD)
+        const brandRevUsd = partnerCount * partnerFee;
+        const brandRevPkr = brandRevUsd * rate;
 
-        // Totals
-        const totalMRRPkr = adRevPkr + proRevPkr + affilRevPkr + brandRevPkr;
-        const totalARRPkr = totalMRRPkr * 12;
+        // Totals (USD main, PKR secondary)
+        const totalMRRUsd = adRevUsd + proRevUsd + affilRevUsd + brandRevUsd;
+        const totalARRUsd = totalMRRUsd * 12;
 
-        const totalMRRUsd = totalMRRPkr / rate;
-        const totalARRUsd = totalARRPkr / rate;
+        const totalMRRPkr = totalMRRUsd * rate;
+        const totalARRPkr = totalARRUsd * rate;
 
-        // Set layout card values (PKR main, USD secondary)
-        document.getElementById('card-stream-1-main').innerText = formatNumber(adRevPkr) + ' PKR';
-        document.getElementById('card-stream-1-sec').innerText = '$' + formatNumber(adRevUsd) + ' USD';
+        // Set layout card values (USD main, PKR secondary)
+        document.getElementById('card-stream-1-main').innerText = '$' + formatNumber(adRevUsd) + ' USD';
+        document.getElementById('card-stream-1-sec').innerText = formatNumber(adRevPkr) + ' PKR';
         
-        document.getElementById('card-stream-2-main').innerText = formatNumber(proRevPkr) + ' PKR';
-        document.getElementById('card-stream-2-sec').innerText = '$' + formatNumber(proRevUsd) + ' USD';
+        document.getElementById('card-stream-2-main').innerText = '$' + formatNumber(proRevUsd) + ' USD';
+        document.getElementById('card-stream-2-sec').innerText = formatNumber(proRevPkr) + ' PKR';
 
-        document.getElementById('card-stream-3-main').innerText = formatNumber(affilRevPkr) + ' PKR';
-        document.getElementById('card-stream-3-sec').innerText = '$' + formatNumber(affilRevUsd) + ' USD';
+        document.getElementById('card-stream-3-main').innerText = '$' + formatNumber(affilRevUsd) + ' USD';
+        document.getElementById('card-stream-3-sec').innerText = formatNumber(affilRevPkr) + ' PKR';
 
-        document.getElementById('card-stream-4-main').innerText = formatNumber(brandRevPkr) + ' PKR';
-        document.getElementById('card-stream-4-sec').innerText = '$' + formatNumber(brandRevUsd) + ' USD';
+        document.getElementById('card-stream-4-main').innerText = '$' + formatNumber(brandRevUsd) + ' USD';
+        document.getElementById('card-stream-4-sec').innerText = formatNumber(brandRevPkr) + ' PKR';
 
-        document.getElementById('card-total-main').innerText = formatNumber(totalMRRPkr) + ' PKR';
-        document.getElementById('card-total-sec').innerText = '$' + formatNumber(totalMRRUsd) + ' USD';
+        document.getElementById('card-total-main').innerText = '$' + formatNumber(totalMRRUsd) + ' USD';
+        document.getElementById('card-total-sec').innerText = formatNumber(totalMRRPkr) + ' PKR';
 
-        document.getElementById('card-arr-main').innerText = formatNumber(totalARRPkr) + ' PKR';
-        document.getElementById('card-arr-sec').innerText = '$' + formatNumber(totalARRUsd) + ' USD';
+        document.getElementById('card-arr-main').innerText = '$' + formatNumber(totalARRUsd) + ' USD';
+        document.getElementById('card-arr-sec').innerText = formatNumber(totalARRPkr) + ' PKR';
 
         // Visualization
-        const totalVal = totalMRRPkr || 1;
-        updateBarChart(adRevPkr / totalVal, proRevPkr / totalVal, affilRevPkr / totalVal, brandRevPkr / totalVal);
+        const totalVal = totalMRRUsd || 1;
+        updateBarChart(adRevUsd / totalVal, proRevUsd / totalVal, affilRevUsd / totalVal, brandRevUsd / totalVal);
     }
 
     function calculateSchoolCheck() {

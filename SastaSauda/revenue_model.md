@@ -16,32 +16,32 @@ Double-digit inflation in Pakistan has placed massive pressure on household mont
 
 ## 2. Monetization Vectors
 
-SastaSauda operates on a combined model of display/native ads, credit card affiliate leads, FMCG brand placements, and premium B2C feature subscriptions.
+SastaSauda operates on an ad-supported B2C utility model. Free users generate display ad impressions during budgeting and shopping sessions, with premium upgrades for card discounts, brand coupons, and cost calculators.
 
 ```mermaid
 graph TD
-    User([Grocery Shopper]) -->|Check Card Offer| Lead[1. Card Referral Commissions]
-    User -->|Upgrade to Pro Vault| Pro[2. Premium B2C Subscriptions]
-    User -->|Browse Shopping Lists| Ads[3. High-Volume Display Ads]
+    User([Grocery Shopper]) -->|Browse Shopping Lists| Ads[1. High-Volume Display Ads]
+    User -->|Check Card Offer| Lead[2. Card Referral Commissions]
+    User -->|Upgrade to Pro Vault| Pro[3. Premium B2C Subscriptions]
     Brands([FMCG Brands / Stores]) -->|Coupon Placements| Placements[4. B2B FMCG Sponsors]
 
-    Lead -->|PKR 2,000 card referral bounty| Rev[Total App Revenue]
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    Lead -->|PKR 2,000 card referral bounty| Rev
     Pro -->|PKR 150/mo subscription| Rev
-    Ads -->|AdMob CPM $0.40| Rev
     Placements -->|PKR 20,000/mo sponsorship| Rev
 ```
 
-### A. Credit Card Affiliate Referrals (B2B Transaction - Lead Gen)
+### A. Ad-Supported Model (Free Tier)
+*   **Format**: Highly active display banner and interstitial ads shown during list building, shelf audits, and receipt uploads. Pro subscribers do not see ads.
+*   **Metrics & Assumptions**:
+    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
+    *   **User Sessions**: Users actively checking grocery items look at screens repeatedly. Free users average 10 sessions/month, viewing 8 pages per session = 80 ad impressions per free user/month.
+
+### B. Credit Card Affiliate Referrals (B2B Transaction - Lead Gen)
 *   **Format**: The app's wallet optimizer calculates how much extra a shopper could save on their specific basket if they possessed a partner credit/debit card (e.g. Silkbank, Bank Alfalah, HBL).
 *   **Monetization Mechanism**: Flat lead bounty paid by the banking partner for each completed card approval.
 *   **Pricing**: 2,000 PKR approved card referral bounty.
 *   **Conversion Rate**: Projected at 0.15% of Monthly Active Users (MAU) per month.
-
-### B. FMCG Brand Sponsored Placements (B2B Sponsors)
-*   **Format**: Fast-Moving Consumer Goods (FMCG) brands (e.g. Unilever, P&G, Tapal, Dalda) pay to sponsor alternative recommendations, highlight discounts, or place coupons inside shopping lists.
-*   **Monetization Mechanism**: Recurrent monthly placement fee per slot.
-*   **Pricing**: 20,000 PKR / month per brand sponsor.
-*   **Target Partners**: 15 active sponsors in Year 1.
 
 ### C. SastaSauda Pro (Premium B2C Subscription)
 *   **Format**: Premium subscription unlocking advanced budgeting and audit features.
@@ -52,11 +52,11 @@ graph TD
 *   **Pricing**: 150 PKR / month (approx. $0.54 USD) or 1,000 PKR / year.
 *   **Conversion Rate**: Projected at 1.0% of Monthly Active Users (MAU).
 
-### D. Ad-Supported Model (Free Tier)
-*   **Format**: Highly active display banner and interstitial ads shown during list building, shelf audits, and receipt uploads. Pro subscribers do not see ads.
-*   **Metrics & Assumptions**:
-    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
-    *   **User Sessions**: Users actively checking grocery items look at screens repeatedly. Free users average 10 sessions/month, viewing 8 pages per session = 80 ad impressions per free user/month.
+### D. FMCG Brand Sponsored Placements (B2B Sponsors)
+*   **Format**: Fast-Moving Consumer Goods (FMCG) brands (e.g. Unilever, P&G, Tapal, Dalda) pay to sponsor alternative recommendations, highlight discounts, or place coupons inside shopping lists.
+*   **Monetization Mechanism**: Recurrent monthly placement fee per slot.
+*   **Pricing**: 20,000 PKR / month per brand sponsor.
+*   **Target Partners**: 15 active sponsors in Year 1.
 
 ---
 

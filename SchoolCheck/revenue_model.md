@@ -18,9 +18,14 @@ Private education in Pakistan is a multi-billion rupee industry. Middle and uppe
 
 ## 2. Primary Monetization Streams
 
-Since safety/educational directories require large user volumes to establish community trust, the model leverages highly targeted premium B2C tools alongside school-adjacent B2B listings.
+SchoolCheck operates on an ad-supported freemium model. Free users generate display ad impressions on scorecards and forums, with premium upgrades for detailed cost calculations, van driver contacts, B2B tutor matching, and admission callback referrals.
 
-### A. SchoolCheck Pro (Premium B2C Subscriptions)
+### A. Targeted Display Ads (AdMob)
+- **Details**: Contextual display ads shown below scorecards and forum posts.
+- **Pakistan CPM**: **$0.40 USD** (approx. 111 PKR).
+- **Engagement**: Users browse multiple reviews and scorecards, averaging 6 check-in sessions/month, viewing 10 pages/session (60 ad impressions per free user/month).
+
+### B. SchoolCheck Pro (Premium B2C Subscriptions)
 - **Features unlocked**:
   - Full access to the **True Annual Cost Calculator** (estimating annual resources, uniforms, mandatory vendors, and O/A Level British Council exam registration fees).
   - Detailed transit delay zones and route registries.
@@ -29,19 +34,14 @@ Since safety/educational directories require large user volumes to establish com
 - **Pricing**: **200 PKR / month** (approx. $0.72 USD) or **1,500 PKR / year**.
 - **Target Conversion**: **1.0% of MAU**.
 
-### B. Home Tutors & Academy Placements (B2B Sponsors)
-- **Details**: Home tutors, academy networks (e.g. Kip's, local O/A level tuition centers), and specialized test preparation classes pay a monthly listing fee to pin their contact cards to relevant school profiles (e.g., showing a top Physics tutor next to Lahore Grammar School profiles).
-- **Pricing**: **15,000 PKR / month** per listing slot. Target of 10 active sponsors in Year 1.
-
 ### C. Daycare & School Admission Referral Leads (B2B Transactions)
 - **Details**: Premium daycares and Montessori centers paying a bounty for verified parent callbacks or tour booking inquiries generated directly through the app.
 - **Referral Payout**: **1,000 PKR** per qualified tour booking referral.
 - **Target Conversion**: **0.25% of MAU** book a tour monthly.
 
-### D. Targeted Display Ads (AdMob)
-- **Details**: Contextual display ads shown below scorecards and forum posts.
-- **Pakistan CPM**: **$0.40 USD** (approx. 111 PKR).
-- **Engagement**: Users browse multiple reviews and scorecards, averaging 6 check-in sessions/month, viewing 10 pages/session (60 ad impressions per free user/month).
+### D. Home Tutors & Academy Placements (B2B Sponsors)
+- **Details**: Home tutors, academy networks (e.g. Kip's, local O/A level tuition centers), and specialized test preparation classes pay a monthly listing fee to pin their contact cards to relevant school profiles (e.g., showing a top Physics tutor next to Lahore Grammar School profiles).
+- **Pricing**: **15,000 PKR / month** per listing slot. Target of 10 active sponsors in Year 1.
 
 ---
 

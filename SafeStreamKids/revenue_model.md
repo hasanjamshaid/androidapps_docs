@@ -10,32 +10,33 @@ The rise of digital screen time among Pakistani children has increased safety ri
 
 *   **Primary Target**: Middle to upper-middle-class urban parents with children aged 2 to 12 who want to prevent exposure to inappropriate local ads (betting, gambling, adult products) and aggressive algorithm traps.
 *   **Safety Priority**: SafeStream Kids blocks all YouTube ads, restricts content strictly to parent-defined whitelists, and limits mobile data usage to protect households from expensive bill shocks.
-*   **Ad-Free Pledge**: Because parental trust is paramount, **SafeStream Kids contains zero advertisements (0 PKR ad revenue)**. It relies entirely on value-added parental utility upgrades.
+*   **Ad-Supported Strategy**: To keep the app accessible to all families while remaining financially sustainable, SafeStream Kids uses an ad-supported free tier that displays kid-safe, non-targeted, COPPA-compliant display ads. Parents can upgrade to SafeStream Pro for a completely ad-free experience.
 
 ---
 
 ## 2. Monetization Vectors
 
-SafeStream Kids monetizes through premium subscriptions (SafeStream Pro), educator referral listings (Parent Portal only), and learning kit affiliate commissions.
+SafeStream Kids monetizes through kid-safe display ads (free tier only), premium subscriptions (SafeStream Pro), educator referral listings (Parent Portal only), and learning kit affiliate commissions.
 
 ```mermaid
 graph TD
-    Parent([Parent / Educator]) -->|Purchase Kits| Shop[1. Learning Kit Affiliate Commissions]
-    Parent -->|Unlock SafeStream Pro| Pro[2. Premium B2C Subscriptions]
-    Parent -->|Browse Montessori Tutors| Placements[3. B2B Educator Placements]
-    Child([Child]) -->|Watch Videos Safely| Sandbox[Ad-Free Player Sandbox]
+    Parent([Parent / Educator]) -->|Purchase Kits| Shop[2. Learning Kit Affiliate Commissions]
+    Parent -->|Unlock SafeStream Pro| Pro[3. Premium B2C Subscriptions (Ad-Free)]
+    Parent -->|Browse Montessori Tutors| Placements[4. B2B Educator Placements]
+    Child([Child]) -->|Watch Free Sandbox| Sandbox[Free Sandbox Player]
+    Sandbox -->|Kid-Safe Ad Impressions| Ads[1. Free Tier Display Ads]
 
-    Shop -->|10% commission on PKR 2,000 kits| Rev[Total App Revenue]
+    Ads -->|CPM-based ad revenues| Rev[Total App Revenue]
+    Shop -->|10% commission on PKR 2,000 kits| Rev
     Pro -->|PKR 150/mo subscription| Rev
     Placements -->|PKR 10,000/mo partnership spot| Rev
-    Sandbox -->|0 PKR Ads to protect kids| Rev
 ```
 
 ### A. SafeStream Pro (Premium B2C Subscription)
-*   **Format**: Premium subscription unlocking advanced parental control features.
+*   **Format**: Premium subscription unlocking advanced parental control features and removing all display ads.
 *   **Free Tier vs. Pro**:
-    *   *Free*: Up to 1 child profile, maximum of 10 parent whitelisted links or 1 playlist, access to the pre-vetted starter library.
-    *   *Pro*: Unlimited whitelisted videos, up to 5 child profiles (Toddler, Kid, Pre-teen levels), AI-powered Urdu transcript/description slang filters, screen-time bedtime lockout calendars, and offline Wi-Fi downloads.
+    *   *Free*: Up to 1 child profile, maximum of 10 parent whitelisted links or 1 playlist, access to the pre-vetted starter library, supported by kid-safe display ads.
+    *   *Pro*: 100% ad-free experience, unlimited whitelisted videos, up to 5 child profiles (Toddler, Kid, Pre-teen levels), AI-powered Urdu transcript/description slang filters, screen-time bedtime lockout calendars, and offline Wi-Fi downloads.
 *   **Pricing**: 150 PKR / month (approx. $0.54 USD) or 1,000 PKR / year.
 *   **Conversion Rate**: Projected at 2.0% of Monthly Active Users (MAU).
 
@@ -66,14 +67,17 @@ These projections are based on three scenarios of **Monthly Active Users (MAU)**
 | **Pro Subscribers (2.0% - 2.5%)**| 300 (2.0%) | 1,000 (2.0%) | 3,750 (2.5%) |
 | **Monthly Montessori Kit Sales** | 75 sales (0.50%) | 375 sales (0.75%) | 1,500 sales (1.00%) |
 | **B2B Educator Placements** | 3 | 10 | 25 |
-| **Monthly Ad Revenue** | **0 PKR ($0)** | **0 PKR ($0)** | **0 PKR ($0)** |
+| **Ad CPM (USD)** | $0.30 | $0.40 | $0.50 |
+| **Sessions per User / month** | 10 | 15 | 20 |
+| **Views per Session** | 4 | 6 | 8 |
+| **Monthly Ad Revenue** | **$176.40 (49,039 PKR)** | **$1,764.00 (490,392 PKR)** | **$11,700.00 (3,252,600 PKR)** |
 | **Monthly Montessori Kit Comm**| $53.96 (15,000 PKR) | $269.78 (75,000 PKR) | $1,079.14 (300,000 PKR) |
 | **Monthly B2B Placement Rev** | $107.91 (30,000 PKR)| $359.71 (100,000 PKR) | $899.28 (250,000 PKR) |
 | **Monthly Pro Subscription Rev** | $161.87 (45,000 PKR) | $539.57 (150,000 PKR)  | $2,023.38 (562,500 PKR) |
-| **Total Expected MRR (PKR)** | **90,000 PKR** | **325,000 PKR** | **1,112,500 PKR** |
-| **Total Expected MRR (USD equivalent)** | **$323.74** | **$1,169.06** | **$4,001.80** |
-| **Total Projected ARR (PKR)** | **1,080,000 PKR** | **3,900,000 PKR** | **13,350,000 PKR** |
-| **Total Projected ARR (USD equivalent)** | **$3,884.88** | **$14,028.72** | **$48,021.60** |
+| **Total Expected MRR (PKR)** | **139,039 PKR** | **815,392 PKR** | **4,365,100 PKR** |
+| **Total Expected MRR (USD equivalent)** | **$500.14** | **$2,933.06** | **$15,701.80** |
+| **Total Projected ARR (PKR)** | **1,668,468 PKR** | **9,784,704 PKR** | **52,381,200 PKR** |
+| **Total Projected ARR (USD equivalent)** | **$6,001.68** | **$35,196.78** | **$188,421.58** |
 
 ---
 
@@ -84,7 +88,7 @@ $$\text{Total Monthly Revenue (PKR)} = R_{ad} + R_{subs} + R_{referrals} + R_{pl
 Where:
 
 1.  **Free Ad Revenue ($R_{ad}$)**:
-    $$R_{ad} = 0\text{ PKR (100\% Ad-Free for Child Safety)}$$
+    $$R_{ad} = \text{MAU} \times (1 - \text{ProConv}) \times \text{Sessions} \times \text{ViewsPerSession} \times \frac{\text{CPM}_{USD}}{1000} \times \text{ExchangeRate}_{PKR}$$
 2.  **Premium Pro Subscriptions ($R_{subs}$)**:
     $$R_{subs} = \text{MAU} \times \text{ProConv} \times \text{Price}_{PKR}$$
 3.  **Montessori Kit Referrals ($R_{referrals}$)**:
@@ -98,6 +102,6 @@ Where:
 
 To modify these variables, run custom scenarios, or perform real-time sensitivity analysis, open the interactive browser-based dashboard calculator:
 
-👉 **[revenue_calculator.html](file:///c:/Essentials/SmartFarms/AndroidApps/Revenue/revenue_calculator.html)**
+👉 **[revenue_calculator.html](file:///c:/Essentials/SmartFarms/androidapps_docs/revenue_calculator.html)**
 
 *Open the file in any web browser to adjust parameters (e.g. MAU size, Montessori kit sales rates, sponsor listing fees) and view updated revenue breakdowns instantly.*

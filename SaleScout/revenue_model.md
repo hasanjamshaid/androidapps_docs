@@ -17,26 +17,26 @@ The retail fashion and e-commerce shopping sector in Pakistan is a high-demand, 
 
 ## 2. Monetization Vectors
 
-SaleScout utilizes a mixed model of B2B brand campaigns, e-commerce affiliate checkouts, premium card stacking memberships, and native ads.
+SaleScout is primarily an ad-supported application. It monetizes through display and native ads on the free tier, supplemented by e-commerce affiliate checkouts, B2B brand placements, and premium card stacking memberships.
 
 ```mermaid
 graph TD
-    User([Deal Hunter]) -->|Click Affiliate link| Checkout[1. E-Commerce Affiliate Fees]
-    User -->|Upgrade Pro plan| Card[2. Premium Pro Subscriptions]
-    User -->|Browse Deals| Ads[3. Feed & Calendar Ads]
+    User([Deal Hunter]) -->|Browse Deals| Ads[1. Free Tier Display Ads]
+    User -->|Click Affiliate link| Checkout[2. E-Commerce Affiliate Fees]
+    User -->|Upgrade Pro plan| Card[3. Premium Pro Subscriptions]
     Brands([Retail Brands / Malls]) -->|Pin Promotion| Spots[4. Featured Brand Ads]
 
-    Checkout -->|4% basket commission| Rev[Total App Revenue]
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    Checkout -->|4% basket commission| Rev
     Card -->|PKR 150/mo subscription| Rev
-    Ads -->|AdMob CPM $0.40| Rev
     Spots -->|PKR 25,000/mo fee| Rev
 ```
 
-### A. Featured Brand Campaigns (B2B Placements - Primary Stream)
-*   **Format**: Retail brands pay to pin their clearance ads at the top of local search feeds, mall categories, or send targeted push alerts to brand followers.
-*   **Monetization Mechanism**: Recurrent monthly advertising fees per campaign location/brand.
-*   **Pricing**: 25,000 PKR / month per brand sponsor.
-*   **Target Partners**: 15 active brand partnerships in Year 1.
+### A. Ad-Supported Model (Free Tier)
+*   **Format**: Display banners shown on search directories, mall listing grids, and seasonal holiday calendars. B2B brand partners and Pro subscribers do not see ads.
+*   **Metrics & Assumptions**:
+    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
+    *   **User Sessions**: Deal hunters check the app frequently. Free users average 12 sessions/month (checking weekly clearances), viewing 5 pages per visit = 60 ad impressions per free user/month.
 
 ### B. E-Commerce Affiliate Commissions
 *   **Format**: Users click direct shopping links for partnered e-commerce networks (Daraz, Elo, Bagallery) inside the deal directories.
@@ -54,11 +54,11 @@ graph TD
 *   **Pricing**: 150 PKR / month (approx. $0.54 USD) or 1,000 PKR / year.
 *   **Conversion Rate**: Projected at 1.0% of Monthly Active Users (MAU).
 
-### D. Ad-Supported Model (Free Tier)
-*   **Format**: Display banners shown on search directories, mall listing grids, and seasonal holiday calendars. B2B brand partners and Pro subscribers do not see ads.
-*   **Metrics & Assumptions**:
-    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
-    *   **User Sessions**: Deal hunters check the app frequently. Free users average 12 sessions/month (checking weekly clearances), viewing 5 pages per visit = 60 ad impressions per free user/month.
+### D. Featured Brand Campaigns (B2B Placements)
+*   **Format**: Retail brands pay to pin their clearance ads at the top of local search feeds, mall categories, or send targeted push alerts to brand followers.
+*   **Monetization Mechanism**: Recurrent monthly advertising fees per campaign location/brand.
+*   **Pricing**: 25,000 PKR / month per brand sponsor.
+*   **Target Partners**: 15 active brand partnerships in Year 1.
 
 ---
 

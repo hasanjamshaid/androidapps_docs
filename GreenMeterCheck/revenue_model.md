@@ -18,34 +18,40 @@ The residential and commercial solar market in Pakistan is experiencing exponent
 
 ## 2. Monetization Vectors
 
-SolarCheck & GreenMeterCheck operate on an ecosystem transaction and subscription framework, combining lead bounties, equipment verification fees, and cloud API integration.
+SolarCheck & GreenMeterCheck operate on an ad-supported freemium model. Free users generate display ads impressions, with paid upgrades for lead matchmaking, equipment serial scanning, and automatic inverter cloud sync.
 
 ```mermaid
 graph TD
-    User([Solar Homeowner]) -->|Request Quote| Installers[1. Solar Installer Lead Gen]
-    User -->|Unlock Scans| Audits[2. Authenticity Verification Fees]
-    User -->|Sync Cloud API| Pro[3. GreenMeter Pro Sync]
-    User -->|Audit Bills| Ads[4. Sizing & Slab Display Ads]
+    User([Solar Homeowner]) -->|Audit Bills| Ads[1. Sizing & Slab Display Ads]
+    User -->|Request Quote| Installers[2. Solar Installer Lead Gen]
+    User -->|Unlock Scans| Audits[3. Authenticity Verification Fees]
+    User -->|Sync Cloud API| Pro[4. GreenMeter Pro Sync]
 
-    Installers -->|PKR 3,000 per lead commission| Rev[Total App Revenue]
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    Installers -->|PKR 3,000 per lead commission| Rev
     Audits -->|PKR 500 one-time fee| Rev
     Pro -->|PKR 250/mo subscription| Rev
-    Ads -->|AdMob CPM $0.40| Rev
 ```
 
-### A. Solar Installer Lead Generation (Primary Stream - SolarCheck)
+### A. Ad-Supported Model (Free Tier)
+*   **Format**: Native banner ads on sizing logs and NEPRA policy alarm screens. B2B installers and Pro subscribers do not see ads.
+*   **Metrics & Assumptions**:
+    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
+    *   **User Sessions**: Average of 6 sessions/month per free user (checking generation logs), viewing 5 pages per session = 30 ad impressions per free user/month.
+
+### B. Solar Installer Lead Generation (SolarCheck)
 *   **Format**: Users input their bill details in the sizing planner. Homeowners requesting physical installation quotes are matched with verified, AEDB-registered installer partners.
 *   **Monetization Mechanism**: A flat bounty commission per verified lead routed.
 *   **Pricing**: 3,000 PKR commission per verified lead.
 *   **Conversion Rate**: Projected at 0.75% of Monthly Active Users (MAU) per month.
 
-### B. Equipment Authenticity Verification Fees (SolarCheck)
+### C. Equipment Authenticity Verification Fees (SolarCheck)
 *   **Format**: The app includes a panel serial scanner checking AEDB registry databases.
 *   **Monetization Mechanism**: Free users can verify up to 5 panel barcodes. Homes building 10kW to 20kW setups (requiring 20 to 40 panels) pay to unlock unlimited scans.
 *   **Pricing**: 500 PKR one-time validation fee.
 *   **Conversion Rate**: Projected at 0.50% of Monthly Active Users (MAU) per month.
 
-### C. GreenMeter Pro - Inverter Cloud Integration (GreenMeterCheck)
+### D. GreenMeter Pro - Inverter Cloud Integration (GreenMeterCheck)
 *   **Format**: Syncs the mobile application with the user's inverter portal APIs (Growatt, Huawei, Solis, GoodWe, Solis Cloud) to run automated discrepancies.
 *   **Pro Features**:
     *   **Automated Discrepancy Audits**: Sends instant alarms if DISCO-credited units drop below inverter logs by >5%.
@@ -53,12 +59,6 @@ graph TD
     *   **Ombudsman Dispute Pre-Filler**: Generates pre-filled NEPRA dispute PDF files.
 *   **Pricing**: 250 PKR / month (approx. $0.90 USD) or 2,000 PKR / year.
 *   **Conversion Rate**: Projected at 1.5% of Monthly Active Users (MAU).
-
-### D. Ad-Supported Model (Free Tier)
-*   **Format**: Native banner ads on sizing logs and NEPRA policy alarm screens. B2B installers and Pro subscribers do not see ads.
-*   **Metrics & Assumptions**:
-    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
-    *   **User Sessions**: Average of 6 sessions/month per free user (checking generation logs), viewing 5 pages per session = 30 ad impressions per free user/month.
 
 ---
 

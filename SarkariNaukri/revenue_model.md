@@ -17,42 +17,42 @@ The government recruitment and public sector testing market in Pakistan is a hig
 
 ## 2. Monetization Vectors
 
-SarkariNaukri leverages B2C subscriptions for test preparation, courier printing margins, coaching sponsorships, and directory ads.
+SarkariNaukri operates on an ad-supported B2C utility model. Free users generate display ad impressions while checking listings, with premium upgrades for mock exam prep, dossier printing/mailing, and tutoring connections.
 
 ```mermaid
 graph TD
-    User([Job Seeker]) -->|Practice Mock Tests| Prep[1. Premium Test Prep SaaS]
-    User -->|Print & Ship Dossier| Courier[2. Dossier Mailing Margin]
-    User -->|View Daily Posts| Ads[3. Job Directory Ads]
+    User([Job Seeker]) -->|View Daily Posts| Ads[1. Job Directory Ads]
+    User -->|Practice Mock Tests| Prep[2. Premium Test Prep SaaS]
+    User -->|Print & Ship Dossier| Courier[3. Dossier Mailing Margin]
     Academies([Coaching Centers / Academies]) -->|Pin Listing| Spots[4. Featured Sponsor Ads]
 
-    Prep -->|PKR 300/mo subscription| Rev[Total App Revenue]
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    Prep -->|PKR 300/mo subscription| Rev
     Courier -->|PKR 300 transaction margin| Rev
-    Ads -->|AdMob CPM $0.40| Rev
     Spots -->|PKR 15,000/mo fee| Rev
 ```
 
-### A. Premium Test Preparation (B2C SaaS - Primary Stream)
+### A. Ad-Supported Model (Free Tier)
+*   **Format**: Display banners shown on daily scanned newspaper postings. Premium test prep users do not see ads.
+*   **Metrics & Assumptions**:
+    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
+    *   **User Sessions**: Job seekers check postings constantly. Free users average 15 sessions/month, viewing 6 pages per session = 90 ad impressions per free user/month.
+
+### B. Premium Test Preparation (B2C SaaS)
 *   **Format**: Monthly B2C subscription giving candidates access to mock exams, past paper PDF archives, video tutorials, and syllabus-based practice quizzes.
 *   **Pricing**: 300 PKR / month (approx. $1.08 USD) or 2,000 PKR / year.
 *   **Conversion Rate**: Projected at 1.5% of Monthly Active Users (MAU).
 
-### B. Automated Dossier Printing & Mailing Service (B2C Transactions)
+### C. Automated Dossier Printing & Mailing Service (B2C Transactions)
 *   **Format**: Since government jobs require physically mailing application dossiers, the app partners with couriers (e.g. TCS, Pakistan Post). Users upload digital copies of their documents, and the app prints, compiles, and ships the package.
 *   **Monetization Mechanism**: Service margin on printing and courier operations.
 *   **Pricing**: 600 PKR flat user price, yielding a **300 PKR net service margin** per order.
 *   **Conversion Rate**: Projected at 0.50% of Monthly Active Users (MAU) per month.
 
-### C. Featured Coaching Center Placements
+### D. Featured Coaching Center Placements
 *   **Format**: Local test preparation academies (PPSC/FPSC centers, CSS tutoring platforms) pay to place banner ads or pin their profiles at the top of local directories.
 *   **Pricing**: 15,000 PKR / month per placement.
 *   **Target Partners**: 10 active coaching center sponsors in Year 1.
-
-### D. Ad-Supported Model (Free Tier)
-*   **Format**: Display banners shown on daily scanned newspaper postings. Premium test prep users do not see ads.
-*   **Metrics & Assumptions**:
-    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
-    *   **User Sessions**: Job seekers check postings constantly. Free users average 15 sessions/month, viewing 6 pages per session = 90 ad impressions per free user/month.
 
 ---
 

@@ -1,83 +1,115 @@
-# AllergyGuard (الرجی گارڈ) expected Revenue Model
+# AllergenCheck — Global Expected Revenue Model & Projections
 
-This document outlines the expected revenue model, monetization channels, target customer segments, and financial scenarios for **AllergyGuard (الرجی گارڈ)**, the mobile ingredient OCR scanner, barcode lookup, and allergen safety mapping app in Pakistan.
-
----
-
-## 1. Target Customer Segments & Local Context
-
-In Pakistan, private food safety is a critical concern for middle-to-high-income families. Packaged grocery products and cosmetics rarely label allergens or derivatives clearly. AllergyGuard addresses this anxiety by offering a dual-mode camera OCR and barcode scanner.
-
-- **Primary Audience**:
-  - Families with children suffering from severe, anaphylactic food allergies (peanuts, eggs, tree nuts, shellfish).
-  - Individuals managing common food intolerances (celiac disease/gluten sensitivity, lactose intolerance).
-  - Health-conscious shoppers verifying pharmaceutical and cosmetic ingredients for harmful chemicals or animal derivatives (E-numbers).
-- **Core Value Proposition**: Dual-mode camera Vision OCR (Gemini API) translates, filters, and maps hidden allergens in English, Urdu, and Roman-Urdu in real time.
+This document outlines the expected revenue model, monetization channels, target customer segments, and financial scenarios for **AllergenCheck**, the mobile ingredient OCR scanner, barcode lookup, and allergen safety mapping app for global markets (US, UK, and European Union).
 
 ---
 
-## 2. Primary Monetization Streams
+## 1. Target Customer Segments & Global Context
 
-Monetization is balanced between B2C consumer features and targeted B2B placements, ensuring the app remains free and accessible for basic safety checks.
+In high-purchasing-power digital economies (US/UK/EU), food allergies and intolerances affect over 250 million people, and food safety standards require daily vigilance. AllergenCheck addresses this through a dual-mode camera OCR and barcode scanner, delivering real-time ingredient analysis.
 
-### A. AllergyGuard Pro (Premium B2C Subscriptions)
-- **Features unlocked**:
-  - Unlimited Gemini Vision OCR scans (free tier limited to 5 scans/month due to API costs).
-  - Advanced pharmaceutical, supplement, and personal care (lotion/soap) ingredient audits.
-  - Offline Room database dictionary updates (useful in grocery stores with poor connectivity).
-- **Pricing**: **150 PKR / month** (approx. $0.54 USD) or **1,000 PKR / year**.
-- **Target Conversion**: **1.5% of MAU**.
-
-### B. Allergen-Free B2B Brand Placements
-- **Details**: When a user scans an "unsafe" product (e.g., standard dairy milk or gluten-containing flour), partner brands paying a monthly placement fee display verified safe local alternatives (e.g., almond milk, organic rice flour, gluten-free bakeries).
-- **Pricing**: **15,000 PKR / month** per brand sponsor slot. Target of 8 sponsors in Year 1.
-
-### C. E-Commerce Affiliate Store Commissions
-- **Details**: In-app marketplace recommending organic or verified allergen-free grocery bundles, with links to partner retail stores (e.g., Alfatah online, Organic Pakistan).
-- **Average Basket Size**: **3,000 PKR**.
-- **Affiliate Commission**: **5% of basket** (150 PKR net commission).
-- **Target Conversion**: **0.50% of MAU** purchasing monthly.
-
-### D. Contextual Display Ads (AdMob)
-- **Details**: Banner ads displayed on search logs and safety scorecards.
-- **Pakistan CPM**: **$0.40 USD** (approx. 111 PKR).
-- **Engagement**: Free tier users average 8 check-in sessions/month, viewing 6 pages/session (48 ad impressions/month).
+*   **Primary Audience**:
+    *   Families managing severe, anaphylactic food allergies (peanuts, eggs, dairy, shellfish).
+    *   Individuals with common food intolerances (celiac disease/gluten sensitivity, lactose intolerance).
+    *   Health-conscious shoppers verifying pharmaceutical and cosmetic ingredients for harmful chemicals or animal derivatives.
+*   **Ad-First Strategy**: The application is positioned as an ads-primary free utility. The free tier contains display ads, generating substantial revenue from high-value Western digital ad economies (high AdMob CPMs). An ad-free experience is reserved for premium Pro subscribers.
 
 ---
 
-## 3. Financial Scenarios (Month 12 Milestone)
+## 2. Monetization Vectors
 
-Projections are calculated at an exchange rate of **1 USD = 278 PKR**:
+AllergenCheck monetizes through free tier display ads, premium B2C subscriptions (AllergenCheck Pro), B2B brand placements, and global affiliate e-commerce commissions.
 
-### Scenario A: Conservative Case (Low User Adoption)
-- **Monthly Active Users (MAU)**: 10,000
-- **Pro Subscribers**: 1.0% -> 100 subscribers
-- **Monthly Ad Impressions**: 9,900 free users * 48 impressions = 475,200 impressions
-- **Ad Revenue**: (475.2k impressions / 1000) * $0.40 CPM * 278 = **52,842 PKR ($190.08 USD)**
-- **Subscription Revenue**: 100 * 150 = **15,000 PKR ($53.96 USD)**
-- **Brand Placements**: 3 sponsors * 15,000 = **45,000 PKR ($161.87 USD)**
-- **Affiliate Commissions**: 10,000 MAU * 0.30% * 150 PKR = **4,500 PKR ($16.19 USD)**
-- **Total MRR**: **117,342 PKR ($422.10 USD)**
-- **Total ARR**: **1,408,104 PKR ($5,065.20 USD)**
+```mermaid
+graph TD
+    User([App User]) -->|Free Scanner Use| Free[Free Tier]
+    User -->|Unlock Pro Tier| Pro[2. AllergenCheck Pro Subscription]
+    Free -->|Display Ad Impressions| Ads[1. Contextual Display Ads]
+    User -->|Browse Safe Brands| Brand[3. B2B Alternative Placements]
+    User -->|Shop Organic Groceries| Shop[4. E-Commerce Affiliate Store]
 
-### Scenario B: Base Case (Target Performance)
-- **Monthly Active Users (MAU)**: 40,000
-- **Pro Subscribers**: 1.5% -> 600 subscribers
-- **Monthly Ad Impressions**: 39,400 free users * 48 impressions = 1,891,200 impressions
-- **Ad Revenue**: (1,891.2k impressions / 1000) * $0.40 CPM * 278 = **210,301 PKR ($756.48 USD)**
-- **Subscription Revenue**: 600 * 150 = **90,000 PKR ($323.74 USD)**
-- **Brand Placements**: 8 sponsors * 15,000 = **120,000 PKR ($431.65 USD)**
-- **Affiliate Commissions**: 40,000 MAU * 0.50% * 150 PKR = **30,000 PKR ($107.91 USD)**
-- **Total MRR**: **450,301 PKR ($1,619.78 USD)**
-- **Total ARR**: **5,403,612 PKR ($19,437.36 USD)**
+    Ads -->|Western AdMob CPMs ($3.50)| Rev[Total App Revenue (USD)]
+    Pro -->|$1.99/mo subscription (Ad-Free)| Rev
+    Brand -->|$100/mo sponsorship spot| Rev
+    Shop -->|5% affiliate commission| Rev
+```
 
-### Scenario C: Optimistic Case (High Virality)
-- **Monthly Active Users (MAU)**: 120,000
-- **Pro Subscribers**: 2.0% -> 2,400 subscribers
-- **Monthly Ad Impressions**: 117,600 free users * 48 impressions = 5,644,800 impressions
-- **Ad Revenue**: (5,644.8k impressions / 1000) * $0.45 CPM (scale) * 278 = **706,164 PKR ($2,540.16 USD)**
-- **Subscription Revenue**: 2,400 * 150 = **360,000 PKR ($1,294.96 USD)**
-- **Brand Placements**: 20 sponsors * 15,000 = **300,000 PKR ($1,079.14 USD)**
-- **Affiliate Commissions**: 120,000 MAU * 0.70% * 150 PKR = **126,000 PKR ($453.24 USD)**
-- **Total MRR**: **1,492,164 PKR ($5,367.50 USD)**
-- **Total ARR**: **17,905,968 PKR ($64,410.00 USD)**
+### A. Contextual Display Ads (Primary Stream)
+*   **Format**: Non-intrusive banner ads displayed on product logs and safety scorecards for free users.
+*   **Monetization Mechanism**: CPM-based AdMob / digital ad networks.
+*   **Western Ad CPM**: **$3.50 USD** average across US/UK/EU.
+*   **Engagement**: Free tier users average 8 check-in sessions/month, viewing 6 pages/session (48 ad impressions/month).
+
+### B. AllergenCheck Pro (Premium B2C Subscriptions)
+*   **Format**: Premium subscription unlocking advanced features and removing all ads.
+*   **Pro Features**:
+    *   Unlimited Gemini Vision OCR scans (free tier limited to 5 scans/month).
+    *   Advanced pharmaceutical, supplement, and cosmetic ingredient audits.
+    *   Offline Room database dictionary updates.
+*   **Pricing**: **$1.99 USD / month** or **$12.99 USD / year**.
+*   **Conversion Rate**: Projected at **1.5% of MAU** (2.0% in Optimistic scenario).
+
+### C. Allergen-Free B2B Brand Placements
+*   **Format**: When a user scans an "unsafe" product (e.g. wheat-based flour), partner brands paying a monthly sponsorship spot display verified safe alternatives (e.g. gluten-free flour brands).
+*   **Pricing**: **$100 USD / month** per brand sponsor.
+*   **Conversion Rate**: Projected at 10 active sponsors in Year 1.
+
+### D. E-Commerce Affiliate Store Commissions
+*   **Format**: Marketplace in the app recommending organic or allergen-free grocery bundles, linking to global stores (e.g., Amazon, iHerb).
+*   **Average Basket Size**: **$40 USD**.
+*   **Affiliate Commission**: **5% of basket** ($2.00 USD net commission).
+*   **Conversion Rate**: Projected at **0.50% of MAU** purchasing monthly.
+
+---
+
+## 3. Financial Projections (Year 1)
+
+These projections are based on three scenarios of **Monthly Active Users (MAU)** reached by Month 12.
+*(Exchange rate used: 1 USD = 278 PKR)*
+
+### Scenario Comparison Table
+
+| Metric | Scenario A (Conservative) | Scenario B (Base Case) | Scenario C (Optimistic) |
+| :--- | :--- | :--- | :--- |
+| **Year 1 Target MAU** | 15,000 | 50,000 | 150,000 |
+| **Pro Subscribers (1.0% - 2.0%)**| 150 (1.0%) | 750 (1.5%) | 3,000 (2.0%) |
+| **Monthly Affiliate Sales (0.3% - 0.7%)**| 45 sales (0.30%) | 250 sales (0.50%) | 1,050 sales (0.70%) |
+| **B2B Sponsor Partners** | 3 | 10 | 25 |
+| **Ad CPM (USD)** | $3.00 | $3.50 | $4.00 |
+| **Monthly Sessions per User** | 6 | 8 | 12 |
+| **Views per Session** | 4 | 6 | 8 |
+| **Monthly Ad Revenue** | **$1,069.20** (297,238 PKR) | **$8,274.00** (2,300,172 PKR) | **$56,448.00** (15,692,544 PKR) |
+| **Monthly Affiliate Comm**| $67.50 (18,765 PKR) | $500.00 (139,000 PKR) | $2,625.00 (729,750 PKR) |
+| **Monthly B2B Placement Rev** | $150.00 (41,700 PKR) | $1,000.00 (278,000 PKR) | $5,000.00 (1,390,000 PKR) |
+| **Monthly Pro Subscription Rev** | $298.50 (82,983 PKR) | $1,492.50 (414,915 PKR) | $5,970.00 (1,659,660 PKR) |
+| **Total Expected MRR (USD)** | **$1,585.20** | **$11,266.50** | **$70,043.00** |
+| **Total Expected MRR (PKR equivalent)** | **440,686 PKR** | **3,132,087 PKR** | **19,471,954 PKR** |
+| **Total Projected ARR (USD)** | **$19,022.40** | **$135,198.00** | **$840,516.00** |
+| **Total Projected ARR (PKR equivalent)** | **5,288,227 PKR** | **37,585,044 PKR** | **233,663,448 PKR** |
+
+---
+
+## 4. Key Financial Formulas
+
+$$\text{Total Monthly Revenue (USD)} = R_{ad} + R_{subs} + R_{referrals} + R_{placements}$$
+
+Where:
+
+1.  **Contextual Ad Revenue ($R_{ad}$)**:
+    $$R_{ad} = \text{MAU} \times (1 - \text{ProConv}) \times \text{Sessions} \times \text{ViewsPerSession} \times \frac{\text{CPM}_{USD}}{1000}$$
+2.  **Premium Pro Subscriptions ($R_{subs}$)**:
+    $$R_{subs} = \text{MAU} \times \text{ProConv} \times \text{Price}_{USD}$$
+3.  **Affiliate Store Commissions ($R_{referrals}$)**:
+    $$R_{referrals} = \text{MAU} \times \text{SalesRate} \times \text{Basket}_{USD} \times \text{CommRate}$$
+4.  **B2B Alternative Placements ($R_{placements}$)**:
+    $$R_{placements} = \text{PartnerCount} \times \text{MonthlySponsorFee}_{USD}$$
+
+---
+
+## 5. Dynamic Revenue Calculator
+
+To modify these variables, run custom scenarios, or perform real-time sensitivity analysis, open the interactive browser-based dashboard calculator:
+
+👉 **[revenue_calculator.html](file:///c:/Essentials/SmartFarms/androidapps_docs/revenue_calculator.html)**
+
+*Open the file in any web browser to adjust parameters (e.g. MAU size, shopping affiliate conversion, sponsor count) and view updated revenue breakdowns instantly in USD.*

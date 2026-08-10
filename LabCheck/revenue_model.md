@@ -17,22 +17,28 @@ The private diagnostic healthcare sector in Pakistan is a massive, high-volume i
 
 ## 2. Monetization Vectors
 
-LabCheck leverages four monetization streams, prioritizing booking commissions and sponsored lab directory slots.
+LabCheck operates on an ad-supported freemium model. Free users generate display ad impressions during search and price comparison sessions, with options to upgrade for direct lab bookings, AI report interpretation, and featured lab highlights.
 
 ```mermaid
 graph TD
-    User([Patient / User]) -->|Book Lab Test| Book[1. Direct Lab Bookings]
-    User -->|Upgrade| Pro[2. LabCheck Pro AI Membership]
-    User -->|Ad Views| Ads[3. Display Directory Ads]
+    User([Patient / User]) -->|Ad Views| Ads[1. Display Directory Ads]
+    User -->|Book Lab Test| Book[2. Direct Lab Bookings]
+    User -->|Upgrade| Pro[3. LabCheck Pro AI Membership]
     Labs([Lab Networks]) -->|Featured Spots| Spots[4. Featured Lab Placement]
 
-    Book -->|12% commission per booking| Rev[Total App Revenue]
+    Ads -->|AdMob CPM $0.40| Rev[Total App Revenue]
+    Book -->|12% commission per booking| Rev
     Pro -->|PKR 100/mo fee| Rev
-    Ads -->|AdMob CPM $0.40| Rev
     Spots -->|PKR 15,000/mo fee| Rev
 ```
 
-### A. Direct Lab Booking Commissions (Primary Stream)
+### A. Ad-Supported Model (Free Tier)
+*   **Format**: Banner ads and native slots shown during directory search results. Pro subscribers are excluded from ad pools.
+*   **Metrics & Assumptions**:
+    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
+    *   **User Sessions**: Average of 3 sessions/month per free user (triggered when a doctor prescribes diagnostic tests), viewing 4 pages per session = 12 ad impressions per free user/month.
+
+### B. Direct Lab Booking Commissions
 *   **Format**: When patients compare test rates on the app, they can book the test directly at the laboratory of their choice.
 *   **Monetization Mechanism**: LabCheck collects a standard referral commission fee from the partner lab for delivering walk-in test volumes.
 *   **Metrics & Assumptions**:
@@ -40,7 +46,7 @@ graph TD
     *   **Average Test Basket Value**: 3,000 PKR (reflecting typical pathology test packages or multi-test profiles like blood sugar + LFTs).
     *   **Booking Conversion Rate**: Projected at 2.0% of Monthly Active Users (MAU) per month.
 
-### B. LabCheck Pro (AI Pathology Assistant)
+### C. LabCheck Pro (AI Pathology Assistant)
 *   **Format**: Premium subscription for patients seeking advanced medical tools.
 *   **Pro Features**:
     *   **AI Lab Report Interpreter**: Users scan report PDFs; the built-in Gemini parser explains the complex clinical findings in plain, non-technical English and Urdu.
@@ -49,18 +55,12 @@ graph TD
 *   **Pricing**: 100 PKR / month (approx. $0.36 USD) or 800 PKR / year.
 *   **Conversion Rate**: Projected at 1.5% of Monthly Active Users (MAU).
 
-### C. Featured Lab & Collection Center Placements
+### D. Featured Lab & Collection Center Placements
 *   **Format**: Local laboratory branches or national diagnostic chains pay to be highlighted at the top of test comparison searches in specific towns or pinned as "PHC/SHCC Regulatory Certified".
 *   **Monetization Mechanism**: Flat monthly advertising fee per featured branch slot.
 *   **Metrics & Assumptions**:
     *   **Monthly Featured Fee**: 15,000 PKR / month.
     *   **Target Partners**: 15 active partner slots in Year 1.
-
-### D. Ad-Supported Model (Free Tier)
-*   **Format**: Banner ads and native slots shown during directory search results. Pro subscribers are excluded from ad pools.
-*   **Metrics & Assumptions**:
-    *   **Pakistan Average CPM**: $0.40 USD (approx. 111 PKR at 278 PKR/USD).
-    *   **User Sessions**: Average of 3 sessions/month per free user (triggered when a doctor prescribes diagnostic tests), viewing 4 pages per session = 12 ad impressions per free user/month.
 
 ---
 
