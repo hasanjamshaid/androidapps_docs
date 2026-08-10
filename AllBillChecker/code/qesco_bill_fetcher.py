@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-IESCO Duplicate Bill Fetcher
-Fetches electricity bill details from Islamabad Electric Supply Company (IESCO) 
+QESCO Duplicate Bill Fetcher
+Fetches electricity bill details from Quetta Electric Supply Company (QESCO) 
 using a 10-digit Customer ID (Consumer ID) or a 14-digit Reference Number.
 """
 
@@ -10,25 +10,25 @@ import argparse
 import json
 from bill_utility import fetch_bill_from_pitc
 
-# Base PITC URL for IESCO duplicate bills
-IESCO_BILL_URL = "https://bill.pitc.com.pk/iescobill"
+# Base PITC URL for QESCO duplicate bills
+QESCO_BILL_URL = "https://bill.pitc.com.pk/qescobill"
 
-def fetch_iesco_bill(identifier: str) -> dict:
+def fetch_qesco_bill(identifier: str) -> dict:
     """
-    Fetches the duplicate IESCO bill details using either:
+    Fetches the duplicate QESCO bill details using either:
     - 10-digit Customer ID / Consumer ID
     - 14-digit Reference Number
     """
-    return fetch_bill_from_pitc(IESCO_BILL_URL, identifier, "IESCO")
+    return fetch_bill_from_pitc(QESCO_BILL_URL, identifier, "QESCO")
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Connects to IESCO and fetches details of the duplicate bill using Consumer ID or Reference Number.",
+        description="Connects to QESCO and fetches details of the duplicate bill using Consumer ID or Reference Number.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python iesco_bill_fetcher.py --id 1234567890
-  python iesco_bill_fetcher.py --id 01123456789012 --json
+  python qesco_bill_fetcher.py --id 1234567890
+  python qesco_bill_fetcher.py --id 01123456789012 --json
 """
     )
     parser.add_argument(
@@ -45,13 +45,13 @@ Examples:
     args = parser.parse_args()
 
     try:
-        bill_data = fetch_iesco_bill(args.id)
+        bill_data = fetch_qesco_bill(args.id)
         
         if args.json:
             print(json.dumps(bill_data, indent=2))
         else:
             print("\n" + "="*50)
-            print("         IESCO BILL DETAILS SUMMARY")
+            print("         QESCO BILL DETAILS SUMMARY")
             print("="*50)
             print(f"Queried ID:             {bill_data['queried_id']}")
             print(f"Consumer ID (Cust ID):  {bill_data['consumer_id'] or 'N/A'}")

@@ -1,40 +1,29 @@
 #!/usr/bin/env python3
 """
-IESCO Duplicate Bill Fetcher
-Fetches electricity bill details from Islamabad Electric Supply Company (IESCO) 
-using a 10-digit Customer ID (Consumer ID) or a 14-digit Reference Number.
+WASA Lahore Duplicate Bill Fetcher
+Fetches water and sewerage bill details from Water and Sanitation Agency (WASA) Lahore
+using an 8-digit to 12-digit Account Number / Consumer Number.
 """
 
 import sys
 import argparse
 import json
-from bill_utility import fetch_bill_from_pitc
-
-# Base PITC URL for IESCO duplicate bills
-IESCO_BILL_URL = "https://bill.pitc.com.pk/iescobill"
-
-def fetch_iesco_bill(identifier: str) -> dict:
-    """
-    Fetches the duplicate IESCO bill details using either:
-    - 10-digit Customer ID / Consumer ID
-    - 14-digit Reference Number
-    """
-    return fetch_bill_from_pitc(IESCO_BILL_URL, identifier, "IESCO")
+from bill_utility import fetch_wasa_lahore_bill
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Connects to IESCO and fetches details of the duplicate bill using Consumer ID or Reference Number.",
+        description="Connects to WASA Lahore duplicate bill portal and fetches details using Account Number.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python iesco_bill_fetcher.py --id 1234567890
-  python iesco_bill_fetcher.py --id 01123456789012 --json
+  python wasa_lahore_bill_fetcher.py --id 12345678
+  python wasa_lahore_bill_fetcher.py --id 12345678 --json
 """
     )
     parser.add_argument(
         "-i", "--id",
         required=True,
-        help="The 10-digit Consumer/Customer ID or 14-digit Reference Number."
+        help="The 8-to-12-digit Account Number."
     )
     parser.add_argument(
         "-j", "--json",
@@ -45,13 +34,13 @@ Examples:
     args = parser.parse_args()
 
     try:
-        bill_data = fetch_iesco_bill(args.id)
+        bill_data = fetch_wasa_lahore_bill(args.id)
         
         if args.json:
             print(json.dumps(bill_data, indent=2))
         else:
             print("\n" + "="*50)
-            print("         IESCO BILL DETAILS SUMMARY")
+            print("       WASA LAHORE BILL DETAILS SUMMARY")
             print("="*50)
             print(f"Queried ID:             {bill_data['queried_id']}")
             print(f"Consumer ID (Cust ID):  {bill_data['consumer_id'] or 'N/A'}")
@@ -59,8 +48,9 @@ Examples:
             print(f"Billing Month:          {bill_data['billing_month'] or 'N/A'}")
             print(f"Consumer Name:          {bill_data['consumer_name'] or 'N/A'}")
             print(f"Consumer Address:       {bill_data['consumer_address'] or 'N/A'}")
-            print(f"Tariff / Sanc. Load:    {bill_data['tariff'] or 'N/A'} / {bill_data['load'] or 'N/A'}")
-            print(f"Units Consumed:         {bill_data['units_consumed'] or 'N/A'} kWh")
+            print(f"Tariff / Category:      {bill_data['tariff'] or 'N/A'}")
+            print(f"Units Consumed:         {bill_data['units_consumed'] or 'N/A'}")
+            print(f"Meter Number:           {bill_data['meter_no'] or 'N/A'}")
             print(f"Connection Date:        {bill_data['connection_date'] or 'N/A'}")
             print("-"*50)
             print(f"Payable Within Due Date:{bill_data['payable_within_due_date'] or 'N/A'} PKR")
