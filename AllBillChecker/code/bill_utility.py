@@ -375,3 +375,436 @@ def fetch_wasa_lahore_bill(account_no: str) -> Dict[str, Any]:
                 
     return data
 
+
+def fetch_cda_water_bill(consumer_no: str) -> Dict[str, Any]:
+    """
+    Fetches duplicate CDA water and allied charges bill details from owo.cda.gov.pk.
+    """
+    cleaned_id = re.sub(r'\D', '', consumer_no)
+    if not (6 <= len(cleaned_id) <= 12):
+        raise ValueError("Invalid consumer number format. CDA consumer number should be between 6 and 12 digits.")
+        
+    base_url = "https://owo.cda.gov.pk/duplicatewaterbill.aspx"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Referer": base_url
+    }
+    
+    session = requests.Session()
+    
+    try:
+        r = session.get(base_url, headers=headers, verify=False, timeout=15)
+        r.raise_for_status()
+    except requests.RequestException as e:
+        raise ConnectionError(
+            f"Failed to connect to CDA billing portal (https://owo.cda.gov.pk). "
+            f"The server might be down for maintenance or offline: {e}"
+        )
+        
+    soup = BeautifulSoup(r.text, 'html.parser')
+    
+    # Extract ASP.NET state variables
+    try:
+        viewstate = soup.find('input', {'name': '__VIEWSTATE'}).get('value', '')
+        viewstate_gen = soup.find('input', {'name': '__VIEWSTATEGENERATOR'}).get('value', '')
+        event_validation = soup.find('input', {'name': '__EVENTVALIDATION'}).get('value', '')
+    except (AttributeError, TypeError) as e:
+        raise ValueError(
+            f"Could not parse ASP.NET state from CDA portal. "
+            f"The page structure may have changed: {e}"
+        )
+        
+    # Dynamically locate the Consumer No field and search button
+    consumer_field = None
+    btn_search = None
+    
+    for inp in soup.find_all('input'):
+        inp_type = (inp.get('type') or '').lower()
+        inp_name = inp.get('name') or ''
+        inp_id = inp.get('id') or ''
+        
+        if inp_type in ['text', ''] and not consumer_field:
+            if any(k in inp_name.lower() or k in inp_id.lower() for k in ['consumer', 'acc', 'number', 'id', 'txt']):
+                consumer_field = inp_name
+        
+        if inp_type == 'submit' and not btn_search:
+            if any(k in inp_name.lower() or k in inp_id.lower() for k in ['search', 'submit', 'btn', 'show', 'print']):
+                btn_search = inp_name
+                
+    # Fallbacks if dynamic detection fails
+    if not consumer_field:
+        consumer_field = "ctl00$ContentPlaceHolder1$txtConsumerNo"
+    if not btn_search:
+        btn_search = "ctl00$ContentPlaceHolder1$btnSearch"
+        
+    payload = {
+        "__VIEWSTATE": viewstate,
+        "__VIEWSTATEGENERATOR": viewstate_gen,
+        "__EVENTVALIDATION": event_validation,
+        consumer_field: cleaned_id,
+        btn_search: "Search"
+    }
+    
+    # Include other hidden inputs that might be on the page
+    for inp in soup.find_all('input', {'type': 'hidden'}):
+        name = inp.get('name')
+        if name and name not in payload:
+            payload[name] = inp.get('value', '')
+            
+    try:
+        r = session.post(base_url, headers=headers, data=payload, verify=False, timeout=20)
+        r.raise_for_status()
+    except requests.RequestException as e:
+        raise ConnectionError(f"Failed to submit query to CDA portal: {e}")
+        
+    response_text = r.text
+    if "not found" in response_text.lower() or "invalid" in response_text.lower():
+        raise ValueError("CDA search error: Bill not found or invalid Consumer Number.")
+        
+    soup = BeautifulSoup(response_text, 'html.parser')
+    
+    # Parse out values
+    def get_val(label_regex: str) -> str:
+        pattern = re.compile(label_regex, re.IGNORECASE)
+        for tag in soup.find_all(['td', 'th', 'span', 'div', 'p', 'b', 'strong', 'label']):
+            tag_text = clean_text(tag.get_text())
+            if pattern.search(tag_text):
+                # Try next sibling
+                sibling = tag.find_next_sibling()
+                if sibling:
+                    val = clean_text(sibling.get_text())
+                    if val:
+                        return val
+                # Try parent's next sibling
+                parent = tag.parent
+                if parent and parent.name in ['td', 'th', 'div', 'span']:
+                    parent_sibling = parent.find_next_sibling()
+                    if parent_sibling:
+                        val = clean_text(parent_sibling.get_text())
+                        if val:
+                            return val
+        return ""
+        
+    data = {
+        "queried_id": cleaned_id,
+        "consumer_id": cleaned_id,
+        "reference_no": cleaned_id,
+        "consumer_name": "",
+        "consumer_address": "",
+        "billing_month": "",
+        "due_date": "",
+        "payable_within_due_date": "",
+        "late_payment_surcharge": "",
+        "payable_after_due_date": "",
+        "units_consumed": "",
+        "meter_no": "",
+        "connection_date": "",
+        "tariff": "",
+        "load": ""
+    }
+    
+    # Try common CDA water bill labels
+    data["consumer_name"] = get_val(r"consumer\s*name|name\s*of\s*consumer|^name$")
+    data["consumer_address"] = get_val(r"consumer\s*address|address")
+    data["billing_month"] = get_val(r"billing\s*month|bill\s*month|month|billing\s*period")
+    data["due_date"] = get_val(r"due\s*date|last\s*date")
+    data["payable_within_due_date"] = get_val(r"payable\s*within\s*due\s*date|amount\s*payable|current\s*bill|payable\s*by\s*due|amount\s*due")
+    data["late_payment_surcharge"] = get_val(r"late\s*payment\s*surcharge|surcharge|late\s*fee|surcharge\s*after\s*due")
+    data["payable_after_due_date"] = get_val(r"payable\s*after\s*due\s*date|payable\s*after|gross\s*payable|amount\s*after\s*due")
+    data["tariff"] = get_val(r"tariff|connection\s*type|category|billing\s*category")
+    data["meter_no"] = get_val(r"meter\s*no|meter\s*number")
+    data["units_consumed"] = get_val(r"units\s*consumed|units")
+    
+    # Clean numeric fields
+    for key in ["payable_within_due_date", "late_payment_surcharge", "payable_after_due_date", "units_consumed"]:
+        val = data[key]
+        if val:
+            num_match = re.search(r'[\d,]+(?:\.\d+)?', val)
+            if num_match:
+                data[key] = num_match.group(0).replace(",", "")
+            else:
+                data[key] = ""
+                
+    return data
+
+
+def fetch_wasa_faisalabad_bill(account_no: str) -> Dict[str, Any]:
+    """
+    Fetches duplicate WASA Faisalabad duplicate bill details from billingdev.wasafaisalabad.gop.pk.
+    """
+    cleaned_id = re.sub(r'\D', '', account_no)
+    if not (8 <= len(cleaned_id) <= 12):
+        raise ValueError("Invalid Account Number format. WASA Faisalabad account number should be between 8 and 12 digits.")
+        
+    url = f"https://billingdev.wasafaisalabad.gop.pk/BillView/{cleaned_id}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    
+    try:
+        r = requests.get(url, headers=headers, verify=False, timeout=15)
+        r.raise_for_status()
+    except requests.RequestException as e:
+        raise ConnectionError(f"Failed to connect to WASA Faisalabad duplicate bill portal: {e}")
+        
+    text = r.text
+    if "no record found" in text.lower() or "not found" in text.lower():
+        raise ValueError("WASA Faisalabad search error: Account Number not found or bill not generated.")
+        
+    soup = BeautifulSoup(text, 'html.parser')
+    
+    def get_val(label_regex: str) -> str:
+        pattern = re.compile(label_regex, re.IGNORECASE)
+        for tag in soup.find_all(['td', 'th', 'span', 'div', 'p', 'b', 'strong', 'label']):
+            tag_text = clean_text(tag.get_text())
+            if pattern.search(tag_text):
+                sibling = tag.find_next_sibling()
+                if sibling:
+                    val = clean_text(sibling.get_text())
+                    if val:
+                        return val
+                parent = tag.parent
+                if parent and parent.name in ['td', 'th', 'div', 'span']:
+                    parent_sibling = parent.find_next_sibling()
+                    if parent_sibling:
+                        val = clean_text(parent_sibling.get_text())
+                        if val:
+                            return val
+        return ""
+        
+    data = {
+        "queried_id": cleaned_id,
+        "consumer_id": cleaned_id,
+        "reference_no": cleaned_id,
+        "consumer_name": "",
+        "consumer_address": "",
+        "billing_month": "",
+        "due_date": "",
+        "payable_within_due_date": "",
+        "late_payment_surcharge": "",
+        "payable_after_due_date": "",
+        "units_consumed": "",
+        "meter_no": "",
+        "connection_date": "",
+        "tariff": "",
+        "load": ""
+    }
+    
+    data["consumer_name"] = get_val(r"consumer\s*name|name\s*of\s*consumer|^name$")
+    data["consumer_address"] = get_val(r"consumer\s*address|address")
+    data["billing_month"] = get_val(r"billing\s*month|bill\s*month|month|billing\s*period")
+    data["due_date"] = get_val(r"due\s*date|last\s*date")
+    data["payable_within_due_date"] = get_val(r"payable\s*within\s*due\s*date|amount\s*payable|current\s*bill|payable\s*by\s*due|amount\s*due")
+    data["late_payment_surcharge"] = get_val(r"late\s*payment\s*surcharge|surcharge|late\s*fee|surcharge\s*after\s*due")
+    data["payable_after_due_date"] = get_val(r"payable\s*after\s*due\s*date|payable\s*after|gross\s*payable|amount\s*after\s*due")
+    data["tariff"] = get_val(r"tariff|connection\s*type|category|billing\s*category")
+    data["meter_no"] = get_val(r"meter\s*no|meter\s*number")
+    data["units_consumed"] = get_val(r"units\s*consumed|units")
+    
+    # Clean numeric fields
+    for key in ["payable_within_due_date", "late_payment_surcharge", "payable_after_due_date", "units_consumed"]:
+        val = data[key]
+        if val:
+            num_match = re.search(r'[\d,]+(?:\.\d+)?', val)
+            if num_match:
+                data[key] = num_match.group(0).replace(",", "")
+            else:
+                data[key] = ""
+                
+    return data
+
+
+def fetch_wasa_rawalpindi_bill(consumer_no: str) -> Dict[str, Any]:
+    """
+    Fetches duplicate WASA Rawalpindi bill details from the JSON API.
+    """
+    cleaned_id = re.sub(r'\D', '', consumer_no)
+    if not (6 <= len(cleaned_id) <= 12):
+        raise ValueError("Invalid Consumer Number format. WASA Rawalpindi consumer number should be between 6 and 12 digits.")
+        
+    url = f"https://wasarwp.gop.pk/api/search_bill.php?consumer_no={cleaned_id}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Referer": "https://wasarwp.gop.pk/"
+    }
+    
+    try:
+        r = requests.get(url, headers=headers, verify=False, timeout=15)
+        if r.status_code == 404:
+            try:
+                resp = r.json()
+                msg = resp.get("message")
+                if msg:
+                    raise ValueError(f"WASA Rawalpindi search error: {msg}")
+            except Exception as ex:
+                if isinstance(ex, ValueError):
+                    raise ex
+            raise ValueError("WASA Rawalpindi search error: Consumer Number not found.")
+            
+        r.raise_for_status()
+        resp = r.json()
+    except requests.RequestException as e:
+        raise ConnectionError(f"Failed to connect to WASA Rawalpindi duplicate bill portal: {e}")
+    except ValueError as e:
+        raise e
+        
+    if not resp.get("success"):
+        raise ValueError(f"WASA Rawalpindi search error: {resp.get('message', 'Bill not found')}")
+        
+    bill = resp.get("bill", {})
+    
+    data = {
+        "queried_id": cleaned_id,
+        "consumer_id": bill.get("wasa_no") or bill.get("wasaNo") or cleaned_id,
+        "reference_no": bill.get("wasa_no") or bill.get("wasaNo") or cleaned_id,
+        "consumer_name": clean_text(bill.get("name")),
+        "consumer_address": clean_text(bill.get("address")),
+        "billing_month": clean_text(bill.get("session_code") or bill.get("sessionCode")),
+        "due_date": clean_text(bill.get("due_date") or bill.get("dueDate")),
+        "payable_within_due_date": clean_text(str(bill.get("total_bill") or bill.get("totalBill") or "")),
+        "late_payment_surcharge": clean_text(str(bill.get("surcharge") or "")),
+        "payable_after_due_date": clean_text(str(bill.get("payable_after_due") or bill.get("payableAfterDue") or "")),
+        "units_consumed": clean_text(str(bill.get("units_consumed") or bill.get("unitsConsumed") or bill.get("units") or "")),
+        "meter_no": "",
+        "connection_date": clean_text(bill.get("con_date") or bill.get("conDate")),
+        "tariff": clean_text(bill.get("connectionType") or bill.get("cat_code") or bill.get("catCode")),
+        "load": ""
+    }
+    
+    # Clean numeric fields
+    for key in ["payable_within_due_date", "late_payment_surcharge", "payable_after_due_date", "units_consumed"]:
+        val = data[key]
+        if val:
+            num_match = re.search(r'[\d,]+(?:\.\d+)?', val)
+            if num_match:
+                data[key] = num_match.group(0).replace(",", "")
+            else:
+                data[key] = ""
+                
+    return data
+
+
+def fetch_wasa_hyderabad_bill(consumer_no: str) -> Dict[str, Any]:
+    """
+    Fetches duplicate WASA Hyderabad bill details from Laravel/Inertia endpoint.
+    """
+    import urllib.parse
+    import json
+    
+    cleaned_id = re.sub(r'\D', '', consumer_no)
+    if not (6 <= len(cleaned_id) <= 12):
+        raise ValueError("Invalid Reference Number format. WASA Hyderabad consumer number should be between 6 and 12 digits.")
+        
+    base_url = "https://bill.hwsc.gos.pk/"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    
+    session = requests.Session()
+    
+    # Step 1: GET main page to retrieve Inertia Version and CSRF Token
+    try:
+        r = session.get(base_url, headers=headers, verify=False, timeout=15)
+        r.raise_for_status()
+    except requests.RequestException as e:
+        raise ConnectionError(f"Failed to connect to WASA Hyderabad duplicate bill portal: {e}")
+        
+    soup = BeautifulSoup(r.text, 'html.parser')
+    app_div = soup.find(id='app') or soup.find(attrs={"data-page": True})
+    
+    inertia_version = "8c42234b07a22ef8845d290b1fbda0a2" # default fallback
+    if app_div and app_div.get('data-page'):
+        try:
+            page_data = json.loads(app_div.get('data-page'))
+            inertia_version = page_data.get('version', inertia_version)
+        except Exception:
+            pass
+            
+    token = urllib.parse.unquote(session.cookies.get('XSRF-TOKEN', ''))
+    if not token:
+        raise ValueError("Could not retrieve session token from WASA Hyderabad portal.")
+        
+    # Step 2: POST to search endpoint
+    search_headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Referer": base_url,
+        "X-XSRF-TOKEN": token,
+        "X-Inertia": "true",
+        "X-Inertia-Version": inertia_version,
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "reference": cleaned_id,
+        "recaptcha_token": "dummy_token",
+        "website": ""
+    }
+    
+    try:
+        r = session.post(f"{base_url}search", json=payload, headers=search_headers, verify=False, timeout=15)
+        
+        # Handle 404 cleanly
+        if r.status_code == 404:
+            try:
+                err_data = r.json()
+                msg = err_data.get("message")
+                if msg:
+                    raise ValueError(f"WASA Hyderabad search error: {msg}")
+            except Exception as ex:
+                if isinstance(ex, ValueError):
+                    raise ex
+            raise ValueError("WASA Hyderabad search error: Reference Number not found.")
+            
+        r.raise_for_status()
+        resp = r.json()
+    except requests.RequestException as e:
+        raise ConnectionError(f"Failed to submit query to WASA Hyderabad portal: {e}")
+    except ValueError as e:
+        # Re-raise standard value errors
+        raise e
+        
+    props = resp.get("props", {})
+    errors = props.get("errors", {})
+    if errors:
+        error_msg = next(iter(errors.values()))
+        raise ValueError(f"WASA Hyderabad search error: {error_msg}")
+        
+    invoices = props.get("invoices", [])
+    if not invoices:
+        raise ValueError("WASA Hyderabad search error: No bills found for this connection.")
+        
+    # Retrieve the latest invoice (first in the array)
+    latest = invoices[0]
+    
+    data = {
+        "queried_id": cleaned_id,
+        "consumer_id": props.get("new_reference") or props.get("old_reference") or cleaned_id,
+        "reference_no": props.get("old_reference") or props.get("new_reference") or cleaned_id,
+        "consumer_name": clean_text(props.get("consumer_name")),
+        "consumer_address": clean_text(props.get("address")),
+        "billing_month": clean_text(latest.get("billing_month")),
+        "due_date": clean_text(latest.get("due_date")),
+        "payable_within_due_date": clean_text(str(latest.get("amount") or "")),
+        "late_payment_surcharge": "",
+        "payable_after_due_date": "",
+        "units_consumed": "",
+        "meter_no": "",
+        "connection_date": "",
+        "tariff": "",
+        "load": ""
+    }
+    
+    # Clean numeric fields
+    for key in ["payable_within_due_date", "late_payment_surcharge", "payable_after_due_date", "units_consumed"]:
+        val = data[key]
+        if val:
+            num_match = re.search(r'[\d,]+(?:\.\d+)?', val)
+            if num_match:
+                data[key] = num_match.group(0).replace(",", "")
+            else:
+                data[key] = ""
+                
+    return data
+
+
+
